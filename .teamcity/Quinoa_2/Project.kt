@@ -2,6 +2,7 @@ package Quinoa_2
 
 import Quinoa_2.vcsRoots.*
 import Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster
+import Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaTeamcityGitRefsHeadsMaster
 import jetbrains.buildServer.configs.kotlin.v10.*
 import jetbrains.buildServer.configs.kotlin.v10.Project
 import jetbrains.buildServer.configs.kotlin.v10.projectFeatures.VersionedSettings
@@ -16,13 +17,14 @@ object Project : Project({
     description = "Adaptive computational fluid dynamics"
 
     vcsRoot(Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
+    vcsRoot(Quinoa_2_GitGithubComQuinoacomputingQuinoaTeamcityGitRefsHeadsMaster)
 
     features {
         versionedSettings {
             id = "PROJECT_EXT_5"
             mode = VersionedSettings.Mode.ENABLED
             buildSettingsMode = VersionedSettings.BuildSettingsMode.PREFER_SETTINGS_FROM_VCS
-            rootExtId = Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster.extId
+            rootExtId = Quinoa_2_GitGithubComQuinoacomputingQuinoaTeamcityGitRefsHeadsMaster.extId
             showChanges = false
             settingsFormat = VersionedSettings.Format.KOTLIN
         }
