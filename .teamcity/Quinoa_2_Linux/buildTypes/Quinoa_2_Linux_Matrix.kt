@@ -45,7 +45,7 @@ object Quinoa_2_Linux_Matrix : Template({
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DSTDLIBCPP=%stdlibcpp% -DCMAKE_DISABLE_FIND_PACKAGE_RNGSSE2=!%rngsse2% -DCMAKE_DISABLE_FIND_PACKAGE_TestU01=!%testu01% -DCMAKE_CXX_FLAGS=-Werror ../src
-                nice -n 10 make -j16
+                nice -10 make -j16
             """.trimIndent()
         }
         script {
@@ -54,7 +54,7 @@ object Quinoa_2_Linux_Matrix : Template({
             workingDir = "build"
             scriptContent = """
                 ${stepPrefix}
-                nice -n 10 ../script/run_tests.sh 16
+                nice -10 ../script/run_tests.sh 16
             """.trimIndent()
         }
     }
