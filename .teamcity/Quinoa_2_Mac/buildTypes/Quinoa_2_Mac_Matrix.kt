@@ -67,8 +67,6 @@ object Quinoa_2_Mac_Matrix : Template({
                 +:<default>
                 +:develop
             """.trimIndent()
-            perCheckinTriggering = true
-            groupCheckinsByCommitter = true
         }
     }
 })

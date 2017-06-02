@@ -76,8 +76,6 @@ object Quinoa_2_Linux_Matrix : Template({
                 +:<default>
                 +:develop
             """.trimIndent()
-            perCheckinTriggering = true
-            groupCheckinsByCommitter = true
         }
     }
 })
