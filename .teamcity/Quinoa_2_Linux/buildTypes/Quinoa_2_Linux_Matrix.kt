@@ -21,7 +21,7 @@ object Quinoa_2_Linux_Matrix : Template({
     val stepPrefix = """
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
       [ %compiler% == clang ] && module load clang/latest openmpi/2.0.2/clang/latest hdf5-1.10.0-patch1-gcc-4.8.5-mmtlfty netcdf-4.4.1-gcc-4.8.5-5xen4a5 hypre-2.10.1-gcc-4.8.5-beuxbxv
-      [ %compiler% == gnu ] && module load openmpi-2.0.1-gcc-4.8.5-jv7w2de hdf5-1.10.0-patch1-gcc-4.8.5-mmtlfty netcdf-4.4.1-gcc-4.8.5-5xen4a5 hypre-2.10.1-gcc-4.8.5-beuxbxv
+      [ %compiler% == gnu ] && module load openmpi-2.0.1-gcc-4.8.5-jv7w2de hdf5-1.10.0-patch1-gcc-4.8.5-mmtlfty netcdf-4.4.1-gcc-4.8.5-5xen4a5 hypre-2.10.1-gcc-4.8.5-beuxbxv root/%compiler%
       [ %compiler% == intel ] && module load intel/2018 mpi hdf5/intel netcdf/intel hypre/intel
       [ %mathlib% == mkl ] && module load mkl/2018
       [[ %mathlib% == lapack && %compiler% == intel ]] && module load lapack/intel
@@ -44,7 +44,7 @@ object Quinoa_2_Linux_Matrix : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DSTDLIBCPP=%stdlibcpp% -DCMAKE_DISABLE_FIND_PACKAGE_RNGSSE2=!%rngsse2% -DCMAKE_DISABLE_FIND_PACKAGE_TestU01=!%testu01% -DCMAKE_CXX_FLAGS=-Werror ../src
+                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DSTDLIBCPP=%stdlibcpp% -DCMAKE_DISABLE_FIND_PACKAGE_RNGSSE2=!%rngsse2% -DCMAKE_DISABLE_FIND_PACKAGE_TestU01=!%testu01% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror ../src
                 make -j16
             """.trimIndent()
         }
