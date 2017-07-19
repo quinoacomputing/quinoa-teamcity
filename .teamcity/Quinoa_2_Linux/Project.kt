@@ -17,14 +17,15 @@ object Project : Project({
     val allBuilds = mutableListOf< BuildParams >()
 
     // Generate matrix with all possible combinations of build parameters,
-    // defined in package buildParams.
+    // defined in package buildParams not using Charm++'s randomized message
+    // queues.
     Compiler.values().forEach{ c ->
       StdLibC.values().forEach{ l ->
         MathLib.values().forEach{ m ->
           CmakeBuildType.values().forEach{ b ->
             for( r in listOf( true, false ) ) {
               for( t in listOf( true, false ) ) {
-                allBuilds.add( BuildParams(b,c,m,l,r,t) )
+                allBuilds.add( BuildParams(b,c,m,l,r,t,false) )
               }
             }
           }
@@ -34,7 +35,16 @@ object Project : Project({
 
     val builds = mutableListOf< BuildParams >()
 
-    // Exclude some builds
+    // Add some builds using Charm++'s randomized message queues
+    Compiler.values().forEach{ c ->
+      StdLibC.values().forEach{ l ->
+        CmakeBuildType.values().forEach{ b ->
+          allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,true) )
+        }
+      }
+    }
+
+    // Exclude gnu/libc++ builds
     allBuilds.forEach{ b ->
       if ( !(b.compiler == Compiler.gnu && b.stdlibc == StdLibC.libc)) {
         builds.add( b );

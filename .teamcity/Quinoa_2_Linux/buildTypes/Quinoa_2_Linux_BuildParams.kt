@@ -10,4 +10,5 @@ data class BuildParams( val buildtype: CmakeBuildType,
                         val mathlib: MathLib,
                         val stdlibc: StdLibC,
                         val rngsse2: Boolean,
-                        val testu01: Boolean )
+                        val testu01: Boolean,
+                        val rndq: Boolean )

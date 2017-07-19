@@ -28,7 +28,9 @@ object Quinoa_2_Linux_Matrix : Template({
       [[ %mathlib% == lapack && %compiler% != intel ]] && module load netlib-lapack-3.6.1-gcc-4.8.5-snwxnfw
       [ %rngsse2% == true ] && module load rngsse2
       [ %testu01% == true ] && module load testu01
-      module load charm/%compiler%-%stdlibcpp% h5part/%compiler% trilinos/%compiler%-%stdlibcpp%/%mathlib%
+      [ %rndq% == true ] && module load charm-rndq/%compiler%-%stdlibcpp%
+      [ %rndq% == false ] && module load charm/%compiler%-%stdlibcpp%
+      module load h5part/%compiler% trilinos/%compiler%-%stdlibcpp%/%mathlib%
       module load pugixml pegtl pstreams boost-1.61.0-gcc-4.8.5-q2hywin gmsh-2.12.0-gcc-4.8.5-p3vpjfb random123 tut cartesian_product numdiff libc++
       module list""".trimIndent()
 
