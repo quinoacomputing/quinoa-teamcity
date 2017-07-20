@@ -8,15 +8,17 @@ class Quinoa_2_Mac_Build( bp: BuildParams ) : BuildType({
     template(Quinoa_2_Mac.buildTypes.Quinoa_2_Mac_Matrix)
 
     val paramToId = bp.buildtype.toString().toExtId() +
-                    bp.compiler.toString().toExtId();
+                    bp.compiler.toString().toExtId() +
+                    bp.rndq.toString().toExtId();
 
     uuid = "7df011b4-4795-4b89-9d03-aba1b1cb53f7_$paramToId"
     extId = "Quinoa_2_Mac_Build_$paramToId"
-    name = "${bp.buildtype.toString()}, ${bp.compiler.toString()}"
+    name = "${bp.buildtype.toString()}, ${bp.compiler.toString()}, rndq=${bp.rndq.toString()}"
     description = "Mac matrix build instance"
 
     params {
         param("buildtype", bp.buildtype.toString())
         param("compiler", bp.compiler.toString())
+        param("rndq", bp.rndq.toString())
     }
 })

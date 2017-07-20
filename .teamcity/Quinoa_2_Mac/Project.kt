@@ -19,7 +19,9 @@ object Project : Project({
     // defined in package buildParams.
     CmakeBuildType.values().forEach{ b ->
       Compiler.values().forEach{ c ->
-         allBuilds.add( BuildParams(b,c) )
+        for( r in listOf( true, false ) ) {
+          allBuilds.add( BuildParams(b,c,r) )
+        }
       }
     }
 
