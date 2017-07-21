@@ -27,7 +27,7 @@ object Quinoa_2_Mac_Matrix : Template({
         script {
             name = "Verify commit"
             id = "RUNNER_20"
-            scriptContent = """git verify-commit %build.vcs.number% 2>&1 | grep "Good signature"""
+            scriptContent = """git verify-commit %build.vcs.number% 2>&1 | grep "Good signature""""
         }
         script {
             name = "Build code"
