@@ -27,7 +27,7 @@ object Quinoa_2_Mac_Matrix : Template({
         script {
             name = "Verify commit"
             id = "RUNNER_20"
-            scriptContent = """git verify-commit %build.vcs.number% 2>&1 | grep "Good signature""""
+            scriptContent = """git verify-commit %build.vcs.number% 2>&1 | grep "Good signature"""
         }
         script {
             name = "Build code"
@@ -35,9 +35,7 @@ object Quinoa_2_Mac_Matrix : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                [ %rndq% == true ] && export TPL_DIR=/Volumes/Storage/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64-rndq
-                [ %rndq% == false ] && export TPL_DIR=/Volumes/Storage/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=%env.TPL_DIR% -DENABLE_ROOT=on ../src
+                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=/Volumes/Storage/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64%tpl% ../src
                 make -j%teamcity.agent.hardware.cpuCount%
             """.trimIndent()
         }

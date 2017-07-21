@@ -5,4 +5,5 @@ enum class Compiler { clang, gnu }
 
 data class BuildParams( val buildtype: CmakeBuildType,
                         val compiler: Compiler,
-                        val rndq: Boolean )
+                        val rndq: Boolean,
+                        val tpl: String )
