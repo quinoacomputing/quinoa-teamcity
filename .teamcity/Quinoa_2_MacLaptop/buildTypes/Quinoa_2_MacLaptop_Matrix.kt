@@ -35,9 +35,7 @@ object Quinoa_2_MacLaptop_Matrix : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                [ %rndq% == true ] && export TPL_DIR=/Volumes/Storage/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64-rndq
-                [ %rndq% == false ] && export TPL_DIR=/Volumes/Storage/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=%env.TPL_DIR% -DENABLE_ROOT=%root% ../src
+                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=/Users/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64%tpl% -DENABLE_ROOT=%root% ../src
                 make -j%teamcity.agent.hardware.cpuCount%
             """.trimIndent()
         }

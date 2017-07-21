@@ -26,7 +26,7 @@ object Project : Project({
 
     val builds = mutableListOf< BuildParams >()
 
-    // Optionally exclude some builds
+    // Optionally exclude some builds (no-op for now)
     allBuilds.forEach{ b ->
       builds.add( b );
     }

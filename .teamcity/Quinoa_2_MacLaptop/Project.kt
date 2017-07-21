@@ -19,15 +19,14 @@ object Project : Project({
     // without ROOT, defined in package buildParams.
     CmakeBuildType.values().forEach{ b ->
       Compiler.values().forEach{ c ->
-        for( r in listOf( true, false ) ) {
-          allBuilds.add( BuildParams(b,c,false,r) )
-        }
+        allBuilds.add( BuildParams(b,c,false,false,"") )
+        allBuilds.add( BuildParams(b,c,false,true,"-rndq") )
       }
     }
 
     // Add ROOT builds
-    allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, false ) )
-    allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, true ) )
+    allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, false, "" ) )
+    allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, true, "-rndq" ) )
 
     val builds = mutableListOf< BuildParams >()
 
