@@ -26,11 +26,11 @@ object Project : Project({
     }
 
     // Add ROOT builds
-    //allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, false, true ) )
+    allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, false ) )
 
     val builds = mutableListOf< BuildParams >()
 
-    // Optionally exclude some builds
+    // Optionally exclude some builds (no-op for now)
     allBuilds.forEach{ b ->
       builds.add( b );
     }
