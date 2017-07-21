@@ -15,18 +15,15 @@ object Project : Project({
     template(Quinoa_2_Mac_Matrix)
     val allBuilds = mutableListOf< BuildParams >()
 
-    // Generate matrix with all possible combinations of build parameters
-    // without ROOT, defined in package buildParams.
+    // Generate matrix with all possible combinations of build parameters,
+    // defined in package buildParams.
     CmakeBuildType.values().forEach{ b ->
       Compiler.values().forEach{ c ->
         for( r in listOf( true, false ) ) {
-          allBuilds.add( BuildParams(b,c,false,r) )
+          allBuilds.add( BuildParams(b,c,r) )
         }
       }
     }
-
-    // Add ROOT builds
-    //allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, false, true ) )
 
     val builds = mutableListOf< BuildParams >()
 
