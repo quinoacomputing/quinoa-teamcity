@@ -17,12 +17,12 @@ object Project : Project({
 
     // Generate matrix with all possible combinations of build parameters
     // without ROOT, defined in package buildParams.
-    CmakeBuildType.values().forEach{ b ->
+    //CmakeBuildType.values().forEach{ b ->
       Compiler.values().forEach{ c ->
-        allBuilds.add( BuildParams(b,c,false,false,"") )
-        allBuilds.add( BuildParams(b,c,false,true,"-rndq") )
+        allBuilds.add( BuildParams(CmakeBuildType.Debug,c,false,false,"") )
+        allBuilds.add( BuildParams(CmakeBuildType.Debug,c,false,true,"-rndq") )
       }
-    }
+    //}
 
     // Add ROOT builds
     allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, false, "" ) )
