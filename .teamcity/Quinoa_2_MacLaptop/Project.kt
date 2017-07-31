@@ -27,6 +27,8 @@ object Project : Project({
     // Add ROOT builds
     allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, false, "" ) )
     allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, true, "-rndq" ) )
+    allBuilds.add( BuildParams( CmakeBuildType.Release, Compiler.clang, true, false, "" ) )
+    allBuilds.add( BuildParams( CmakeBuildType.Release, Compiler.clang, true, true, "-rndq" ) )
 
     val builds = mutableListOf< BuildParams >()
 
