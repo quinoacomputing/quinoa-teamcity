@@ -13,6 +13,12 @@ object Quinoa_2_Doc_Matrix : Template({
     extId = "Quinoa_2_Doc_Matrix"
     name = "Matrix"
 
+    artifactRules = """
+        unittest_coverage
+        regression_coverage
+        test_coverage
+    """.trimIndent()
+
     vcs {
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
 
@@ -37,6 +43,7 @@ object Quinoa_2_Doc_Matrix : Template({
                 rm -rf build && mkdir build && cd build
                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
                 make -j`grep -c processor /proc/cpuinfo` unittest_coverage
+                mv doc/html/unittest_coverage .
             """.trimIndent()
         }
         script {
@@ -47,18 +54,20 @@ object Quinoa_2_Doc_Matrix : Template({
                 rm -rf build && mkdir build && cd build
                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
                 make -j`grep -c processor /proc/cpuinfo` regression_coverage
+                mv doc/html/regression_coverage .
             """.trimIndent()
         }
-        script {
-            name = "Generate full (unit & regression) test coverage report"
-            id = "RUNNER_20"
-            scriptContent = """
-                ${stepPrefix}
-                rm -rf build && mkdir build && cd build
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
-                make -j`grep -c processor /proc/cpuinfo` test_coverage
-            """.trimIndent()
-        }
+//         script {
+//             name = "Generate full (unit & regression) test coverage report"
+//             id = "RUNNER_20"
+//             scriptContent = """
+//                 ${stepPrefix}
+//                 rm -rf build && mkdir build && cd build
+//                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
+//                 make -j`grep -c processor /proc/cpuinfo` test_coverage
+//                 mv doc/html/test_coverage .
+//             """.trimIndent()
+//         }
     }
 
     requirements {
