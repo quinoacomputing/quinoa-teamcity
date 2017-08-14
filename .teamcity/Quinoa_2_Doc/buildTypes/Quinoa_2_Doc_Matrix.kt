@@ -14,9 +14,7 @@ object Quinoa_2_Doc_Matrix : Template({
     name = "Matrix"
 
     artifactRules = """
-        unittest_coverage
-        regression_coverage
-        test_coverage
+        build/doc/html => html
     """.trimIndent()
 
     vcs {
@@ -28,6 +26,8 @@ object Quinoa_2_Doc_Matrix : Template({
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
       module load openmpi-2.0.1-gcc-4.8.5-jv7w2de hdf5-1.10.0-patch1-gcc-4.8.5-mmtlfty netcdf-4.4.1-gcc-4.8.5-5xen4a5 hypre-2.10.1-gcc-4.8.5-beuxbxv root/gnu mkl/2018 rngsse2 testu01 charm/gnu-libstdc++ h5part/gnu trilinos/gnu-libstdc++/mkl pugixml pegtl pstreams boost-1.61.0-gcc-4.8.5-q2hywin gmsh-2.12.0-gcc-4.8.5-p3vpjfb random123 tut cartesian_product numdiff
       module list""".trimIndent()
+    val cmakeCmd = "cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src"
+    val makeCmd = "make -j`grep -c processor /proc/cpuinfo`"
 
     steps {
         script {
@@ -35,37 +35,62 @@ object Quinoa_2_Doc_Matrix : Template({
             id = "RUNNER_17"
             scriptContent = """/ccs/opt/git/bin/git verify-commit %build.vcs.number% 2>&1 | grep "Good signature""""
         }
+//                 ${cmakeCmd}
+//                 ${makeCmd} regression_coverage
+//                 mv doc/html/regression_coverage .. && rm * -rf
+//                 ${cmakeCmd}
+//                 ${makeCmd} test_coverage
+//                 mv doc/html/test_coverage .. && rm * -rf
+//                 ${cmakeCmd}
+//                 ${makeCmd} cppcheck
+//                 mv doc/cppcheck .. && rm * -rf
         script {
-            name = "Generate unit test coverage report"
+            name = "Generate documentation"
             id = "RUNNER_18"
             scriptContent = """
                 ${stepPrefix}
+                rm -rf unittest_coverage regression_coverage test_coverage cppcheck
                 rm -rf build && mkdir build && cd build
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
-                make -j`grep -c processor /proc/cpuinfo` unittest_coverage
-                mv doc/html/unittest_coverage .
-            """.trimIndent()
-        }
-        script {
-            name = "Generate regression test coverage report"
-            id = "RUNNER_19"
-            scriptContent = """
-                ${stepPrefix}
-                rm -rf build && mkdir build && cd build
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
-                make -j`grep -c processor /proc/cpuinfo` regression_coverage
-                mv doc/html/regression_coverage .
+                ${cmakeCmd}
+                ${makeCmd} unittest_coverage
+                mv doc/html/unittest_coverage .. && rm * -rf
+                ${cmakeCmd}
+                ${makeCmd} doc
+                cd doc/html
+                mv ../../../unittest_coverage .
+                touch .nojekyll
+                cp ../../../doc/images/* .
+                cd ../../.. && git clone git@github.com:quinoacomputing/quinoacomputing.github.io.git && cd -
+                cp ../../../quinoacomputing.github.io/README.md .
             """.trimIndent()
         }
 //         script {
-//             name = "Generate full (unit & regression) test coverage report"
-//             id = "RUNNER_20"
+//             name = "Generate documentation, combine with code coverage reports"
+//             id = "RUNNER_21"
 //             scriptContent = """
 //                 ${stepPrefix}
 //                 rm -rf build && mkdir build && cd build
 //                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
-//                 make -j`grep -c processor /proc/cpuinfo` test_coverage
-//                 mv doc/html/test_coverage .
+//                 make doc
+//                 cd doc/html
+//                 mv ../unittest_coverage .
+//                 touch .nojekyll
+//                 cp ../../../doc/images/* .
+//                 cd .. && git clone git@github.com:quinoacomputing/quinoacomputing.github.io.git && cd -
+//                 cp ../quinoacomputing.github.io/README.md .
+//             """.trimIndent()
+//         }
+//         script {
+//             name = "Push doc, code coverage, and cppcheck reports to quinoacomputing.github.io"
+//             id = "RUNNER_21"
+//             scriptContent = """
+//                 ${stepPrefix}
+//                 cd quinoacomputing.github.io
+//                 git rm -rf .
+//                 mv ../doc/html/* ../doc/html/.nojekyll .
+//                 git add .
+//                 git commit --no-gpg-sign -m "Documentation for changeset %build.vcs.number%"
+//                 git push
 //             """.trimIndent()
 //         }
     }
