@@ -24,6 +24,7 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
         script {
             name = "Push documentation, code coverage, and static analysis reports"
             scriptContent = """
+                mv README.md html/
                 git rm -rf .
                 mv html/* html/.nojekyll .
                 git add .
