@@ -59,35 +59,6 @@ object Quinoa_2_Doc_Matrix : Template({
                 cp ../../../doc/images/* .
             """.trimIndent()
         }
-//         script {
-//             name = "Generate documentation, combine with code coverage reports"
-//             id = "RUNNER_21"
-//             scriptContent = """
-//                 ${stepPrefix}
-//                 rm -rf build && mkdir build && cd build
-//                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DENABLE_ROOT=on -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on ../src
-//                 make doc
-//                 cd doc/html
-//                 mv ../unittest_coverage .
-//                 touch .nojekyll
-//                 cp ../../../doc/images/* .
-//                 cd .. && git clone git@github.com:quinoacomputing/quinoacomputing.github.io.git && cd -
-//                 cp ../quinoacomputing.github.io/README.md .
-//             """.trimIndent()
-//         }
-//         script {
-//             name = "Push doc, code coverage, and cppcheck reports to quinoacomputing.github.io"
-//             id = "RUNNER_21"
-//             scriptContent = """
-//                 ${stepPrefix}
-//                 cd quinoacomputing.github.io
-//                 git rm -rf .
-//                 mv ../doc/html/* ../doc/html/.nojekyll .
-//                 git add .
-//                 git commit --no-gpg-sign -m "Documentation for changeset %build.vcs.number%"
-//                 git push
-//             """.trimIndent()
-//         }
     }
 
     requirements {

@@ -16,14 +16,20 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
     description = "Deploy documentation, code coverage, and static analysis reports from release build"
 
     vcs {
+        root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoacomputingGithubIoGitRefsHeadsMaster)
-
     }
 
     steps {
         script {
             name = "Push documentation, code coverage, and static analysis reports"
-            scriptContent = "ls"
+            scriptContent = """
+                git rm -rf .
+                mv html/* html/.nojekyll .
+                git add .
+                git commit -m "Documentation for commit %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster%"
+                git push
+            """.trimIndent()
         }
     }
 
