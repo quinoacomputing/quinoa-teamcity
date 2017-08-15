@@ -54,11 +54,12 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${cmakeCmd}
                 ${makeCmd} doc
                 cd doc/html
-                mv ../../../unittest_coverage .
+                mkdir %buildtype% && mv ../../../unittest_coverage %buildtype%/.
                 touch .nojekyll
                 cp ../../../doc/images/* .
             """.trimIndent()
         }
+
     }
 
     requirements {
