@@ -13,13 +13,10 @@ object Quinoa_2_Doc_Matrix : Template({
     extId = "Quinoa_2_Doc_Matrix"
     name = "Matrix"
 
-    artifactRules = """
-        build/doc/html => html
-    """.trimIndent()
+    artifactRules = "build/doc/html => html"
 
     vcs {
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
-
     }
 
     val stepPrefix = """
@@ -60,8 +57,6 @@ object Quinoa_2_Doc_Matrix : Template({
                 mv ../../../unittest_coverage .
                 touch .nojekyll
                 cp ../../../doc/images/* .
-                cd ../../.. && git clone git@github.com:quinoacomputing/quinoacomputing.github.io.git && cd -
-                cp ../../../quinoacomputing.github.io/README.md .
             """.trimIndent()
         }
 //         script {

@@ -18,6 +18,7 @@ object Project : Project({
 
     vcsRoot(Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
     vcsRoot(Quinoa_2_GitGithubComQuinoacomputingQuinoaTeamcityGitRefsHeadsMaster)
+    vcsRoot(Quinoa_2_GitGithubComQuinoacomputingQuinoacomputingGithubIoGitRefsHeadsMaster)
 
     features {
         versionedSettings {
