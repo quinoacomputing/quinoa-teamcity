@@ -38,6 +38,10 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
         finishBuildTrigger {
             buildTypeExtId = Quinoa_2_Doc_Build_Release.extId
             successfulOnly = true
+            branchFilter = """
+                +:<default>
+                +:develop
+            """.trimIndent()
         }
     }
 
