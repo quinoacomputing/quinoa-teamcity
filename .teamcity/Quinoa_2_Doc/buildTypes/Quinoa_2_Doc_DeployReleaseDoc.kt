@@ -22,9 +22,19 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
 
     steps {
         script {
-            name = "Push documentation, code coverage, and static analysis reports"
+            name = "Combine documentation, code coverage and static analysis reports"
+            id = "RUNNER_31"
             scriptContent = """
-                mv README.md html/
+                cd html
+                rm -rf Release
+                mkdir Release
+                mv ../unittest_coverage ../regression_coverage ../test_coverage ../cppcheck Release/
+            """.trimIndent()
+        }
+        script {
+            name = "Push documentation, code coverage, and static analysis reports"
+            id = "RUNNER_32"
+            scriptContent = """
                 git rm -rf .
                 mv html/* html/.nojekyll .
                 git add .
@@ -53,7 +63,13 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
             }
 
             artifacts {
-                artifactRules = "html => html"
+                artifactRules = """
+                  unittest_coverage => unittest_coverage
+                  regression_coverage => regression_coverage
+                  test_coverage => test_coverage
+                  cppcheck => cppcheck
+                  html => html
+                """.trimIndent()
             }
         }
     }
