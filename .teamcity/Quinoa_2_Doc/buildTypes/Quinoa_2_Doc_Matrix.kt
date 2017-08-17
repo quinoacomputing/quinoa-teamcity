@@ -15,12 +15,12 @@ object Quinoa_2_Doc_Matrix : Template({
     name = "Matrix"
 
     artifactRules = """
-       unittest_coverage => unittest_coverage
-       regression_coverage => regression_coverage
-       test_coverage => test_coverage
-       cppcheck => cppcheck
-       html => html
-     """.trimIndent()
+      unittest_coverage => unittest_coverage
+      regression_coverage => regression_coverage
+      test_coverage => test_coverage
+      cppcheck => cppcheck
+      html => html
+    """.trimIndent()
 
     vcs {
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)

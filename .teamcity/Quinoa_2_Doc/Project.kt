@@ -13,10 +13,11 @@ object Project : Project({
 
     template(Quinoa_2_Doc_Matrix)
 
-    // Generate doc builds
-    buildType(Quinoa_2_Doc_Build_Debug)
+    // Generate doc and coverage builds
     buildType(Quinoa_2_Doc_Build_Release)
+    buildType(Quinoa_2_Doc_Build_Debug)
 
     // Generate deploy builds
+    buildType(Quinoa_2_Doc_DeployDebugDoc)
     buildType(Quinoa_2_Doc_DeployReleaseDoc)
 })

@@ -1,6 +1,6 @@
 package Quinoa_2_Doc.buildTypes
 
-import Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Release
+import Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Debug
 import jetbrains.buildServer.configs.kotlin.v10.*
 import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep.*
@@ -9,36 +9,35 @@ import jetbrains.buildServer.configs.kotlin.v10.triggers.FinishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v10.triggers.FinishBuildTrigger.*
 import jetbrains.buildServer.configs.kotlin.v10.triggers.finishBuildTrigger
 
-object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
-    uuid = "7674b556-609f-4375-be3d-45ea9b1f380c"
-    extId = "Quinoa_2_Doc_DeployReleaseDoc"
-    name = "Deploy release doc"
-    description = "Deploy documentation, code coverage, and static analysis reports from release build"
+object Quinoa_2_Doc_DeployDebugDoc : BuildType({
+    uuid = "64caa3c2-77e4-45b4-9ab5-4cd785870789"
+    extId = "Quinoa_2_Doc_DeployDebugDoc"
+    name = "Deploy debug doc"
+    description = "Deploy documentation, code coverage, and static analysis reports from debug build"
 
     vcs {
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoacomputingGithubIoGitRefsHeadsMaster)
+
     }
 
     steps {
         script {
             name = "Combine documentation, code coverage and static analysis reports"
-            id = "RUNNER_31"
             scriptContent = """
                 cd html
-                rm -rf Release
-                mkdir Release
-                mv ../unittest_coverage ../regression_coverage ../test_coverage ../cppcheck Release/
+                rm -rf Debug
+                mkdir Debug
+                mv ../unittest_coverage ../regression_coverage ../test_coverage ../cppcheck Debug/
             """.trimIndent()
         }
         script {
             name = "Push documentation, code coverage, and static analysis reports"
-            id = "RUNNER_32"
             scriptContent = """
                 git rm -rf .
                 mv html/* html/.nojekyll .
                 git add .
-                git commit -m "Documentation for commit %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster% updating coverage reports for Release builds"
+                git commit -m "Documentation for commit %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster% updating coverage reports for Debug builds"
                 git push
             """.trimIndent()
         }
@@ -46,7 +45,7 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
 
     triggers {
         finishBuildTrigger {
-            buildTypeExtId = Quinoa_2_Doc_Build_Release.extId
+            buildTypeExtId = Quinoa_2_Doc_Build_Debug.extId
             successfulOnly = true
             branchFilter = """
                 +:<default>
@@ -56,7 +55,7 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
     }
 
     dependencies {
-        dependency(Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Release) {
+        dependency(Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Debug) {
             snapshot {
                 runOnSameAgent = true
                 onDependencyFailure = FailureAction.FAIL_TO_START
@@ -64,11 +63,15 @@ object Quinoa_2_Doc_DeployReleaseDoc : BuildType({
 
             artifacts {
                 artifactRules = """
-                  unittest_coverage => unittest_coverage
-                  regression_coverage => regression_coverage
-                  test_coverage => test_coverage
-                  cppcheck => cppcheck
-                  html => html
+                    unittest_coverage => unittest_coverage
+                    
+                    regression_coverage => regression_coverage
+                    
+                    test_coverage => test_coverage
+                    
+                    cppcheck => cppcheck
+                    
+                    html => html
                 """.trimIndent()
             }
         }
