@@ -79,6 +79,6 @@ object Quinoa_2_Doc_DeployDebugDoc : BuildType({
 
     requirements {
         equals("teamcity.agent.jvm.os.name", "Linux")
-        contains("teamcity.agent.name", "ccscs")
+        contains("teamcity.agent.name", "ccscs3-14")
     }
 })
