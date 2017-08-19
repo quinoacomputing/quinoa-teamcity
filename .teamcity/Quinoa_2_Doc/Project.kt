@@ -17,7 +17,6 @@ object Project : Project({
     buildType(Quinoa_2_Doc_Build_Release)
     buildType(Quinoa_2_Doc_Build_Debug)
 
-    // Generate deploy builds
-    buildType(Quinoa_2_Doc_DeployDebugDoc)
-    buildType(Quinoa_2_Doc_DeployReleaseDoc)
+    // Generate deploy build
+    buildType(Quinoa_2_Doc_Deploy)
 })

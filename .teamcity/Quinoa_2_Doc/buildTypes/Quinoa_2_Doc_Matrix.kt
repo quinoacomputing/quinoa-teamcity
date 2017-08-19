@@ -14,13 +14,7 @@ object Quinoa_2_Doc_Matrix : Template({
     extId = "Quinoa_2_Doc_Matrix"
     name = "Matrix"
 
-    artifactRules = """
-      unittest_coverage => unittest_coverage
-      regression_coverage => regression_coverage
-      test_coverage => test_coverage
-      cppcheck => cppcheck
-      html => html
-    """.trimIndent()
+    artifactRules = "%buildtype% => %buildtype%"
 
     vcs {
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
@@ -50,8 +44,9 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${stepPrefix}
                 ${cmakeCmd}
                 ${makeCmd} unittest_coverage
-                rm -rf ../unittest_coverage
-                mv doc/html/unittest_coverage ..
+                mkdir -p ../%buildtype%
+                rm -rf ../%buildtype%/unittest_coverage
+                mv doc/html/unittest_coverage ../%buildtype%
             """.trimIndent()
         }
         script {
@@ -61,8 +56,8 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${stepPrefix}
                 ${cmakeCmd}
                 ${makeCmd} regression_coverage
-                rm -rf ../regression_coverage
-                mv doc/html/regression_coverage ..
+                rm -rf ../%buildtype%/regression_coverage
+                mv doc/html/regression_coverage ../%buildtype%
             """.trimIndent()
         }
         script {
@@ -72,8 +67,8 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${stepPrefix}
                 ${cmakeCmd}
                 ${makeCmd} test_coverage
-                rm -rf ../test_coverage
-                mv doc/html/test_coverage ..
+                rm -rf ../%buildtype%/test_coverage
+                mv doc/html/test_coverage ../%buildtype%
             """.trimIndent()
         }
         script {
@@ -83,8 +78,8 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${stepPrefix}
                 ${cmakeCmd}
                 ${makeCmd} cppcheck
-                rm -rf ../cppcheck
-                mv doc/cppcheck ..
+                rm -rf ../%buildtype%/cppcheck
+                mv doc/cppcheck ../%buildtype%
             """.trimIndent()
         }
         script {
@@ -94,9 +89,9 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${stepPrefix}
                 ${cmakeCmd}
                 ${makeCmd} doc
-                rm -rf ../html
+                rm -rf ../%buildtype%/html
                 cd doc/html && touch .nojekyll && cp ../../../doc/images/* . && mv ../../../README.md . && cd -
-                mv doc/html ..
+                mv doc/html ../%buildtype%
             """.trimIndent()
         }
     }
