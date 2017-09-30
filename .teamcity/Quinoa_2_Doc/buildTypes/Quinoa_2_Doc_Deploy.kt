@@ -35,7 +35,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
             name = "Push documentation, code coverage, and static analysis reports"
             id = "RUNNER_32"
             scriptContent = """
-                git rm .
+                git rm -f .
                 mv Release/html/* Release/html/.nojekyll .
                 rm -rf Release/html Debug/html
                 git add .
