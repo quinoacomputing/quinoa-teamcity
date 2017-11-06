@@ -20,18 +20,18 @@ object Quinoa_2_Linux_Matrix : Template({
 
     val stepPrefix = """
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
-      [ %compiler% == clang ] && module load clang/latest openmpi/2.0.2/clang/latest hdf5-1.10.0-patch1-gcc-4.8.5-mmtlfty netcdf-4.4.1-gcc-4.8.5-5xen4a5 hypre-2.10.1-gcc-4.8.5-beuxbxv
-      [ %compiler% == gnu ] && module load openmpi-2.0.1-gcc-4.8.5-jv7w2de hdf5-1.10.0-patch1-gcc-4.8.5-mmtlfty netcdf-4.4.1-gcc-4.8.5-5xen4a5 hypre-2.10.1-gcc-4.8.5-beuxbxv root/gnu
+      [ %compiler% == clang ] && module load clang/latest openmpi/2.0.2/clang/latest hdf5-1.10.0-patch1-gcc-6.2.0-nd2s5nq netcdf-4.4.1-gcc-6.2.0-tepm5mg hypre-2.10.1-gcc-6.2.0-f5e3fcv
+      [ %compiler% == gnu ] && module load openmpi-2.0.1-gcc-6.2.0-3s6vg42 hdf5-1.10.0-patch1-gcc-6.2.0-nd2s5nq netcdf-4.4.1-gcc-6.2.0-tepm5mg hypre-2.10.1-gcc-6.2.0-f5e3fcv root/gnu
       [ %compiler% == intel ] && module load intel/2018 openmpi/2.0.2/intel/2018 hdf5/intel netcdf/intel hypre/intel
       [ %mathlib% == mkl ] && module load mkl/2018
       [[ %mathlib% == lapack && %compiler% == intel ]] && module load lapack/intel
-      [[ %mathlib% == lapack && %compiler% != intel ]] && module load netlib-lapack-3.6.1-gcc-4.8.5-snwxnfw
+      [[ %mathlib% == lapack && %compiler% != intel ]] && module load netlib-lapack-3.6.1-gcc-6.2.0-m7bgcy5
       [ %rngsse2% == true ] && module load rngsse2
       [ %testu01% == true ] && module load testu01
       [ %rndq% == true ] && module load charm-rndq/%compiler%-%stdlibcpp%
       [ %rndq% == false ] && module load charm/%compiler%-%stdlibcpp%
       module load h5part/%compiler% trilinos/%compiler%-%stdlibcpp%/%mathlib%
-      module load pugixml pegtl pstreams boost-1.61.0-gcc-4.8.5-q2hywin gmsh-2.12.0-gcc-4.8.5-p3vpjfb random123 tut cartesian_product numdiff libc++
+      module load pugixml pegtl pstreams boost-1.62.0-gcc-6.2.0-ae5o7qs gmsh-2.12.0-gcc-6.2.0-xsyhck4 random123 tut cartesian_product numdiff libc++
       module list""".trimIndent()
 
     steps {
