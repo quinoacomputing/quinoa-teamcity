@@ -20,7 +20,7 @@ object Quinoa_2_Linux_Matrix : Template({
 
     val stepPrefix = """
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
-      [ %compiler% == clang ] && module load clang/latest openmpi/2.0.2/clang/latest hdf5/clang netcdf/clang hypre/clang root/clang
+      [ %compiler% == clang ] && module load clang/latest openmpi/2.0.2/clang/latest hdf5/clang netcdf/clang hypre/clang
       [ %compiler% == gnu ] && module load openmpi-3.0.0-gcc-4.8.5-fcuaicj hdf5-1.10.1-gcc-4.8.5-rosmsxt netcdf-4.4.1.1-gcc-4.8.5-4rodz7d hypre-2.12.1-gcc-4.8.5-f34qmcg root/gnu
       [ %compiler% == intel ] && module load intel/2018 openmpi/2.0.2/intel/2018 hdf5/intel netcdf/intel hypre/intel
       [ %mathlib% == mkl ] && module load mkl/2018
