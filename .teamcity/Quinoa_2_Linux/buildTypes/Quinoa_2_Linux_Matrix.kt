@@ -56,7 +56,7 @@ object Quinoa_2_Linux_Matrix : Template({
             workingDir = "build"
             scriptContent = """
                 ${stepPrefix}
-                ../script/run_tests.sh 16
+                ../script/run_tests.sh 16 -oversubscribe
             """.trimIndent()
         }
     }
