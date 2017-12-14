@@ -35,7 +35,7 @@ object Quinoa_2_Mac_Matrix : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=/Volumes/Storage/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64%tpl% ../src
+                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=/Volumes/Storage/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64%tpl% -DRUNNER_ARGS="-oversubscribe --bind-to none --map-by node" ../src
                 make -j%teamcity.agent.hardware.cpuCount%
             """.trimIndent()
         }
