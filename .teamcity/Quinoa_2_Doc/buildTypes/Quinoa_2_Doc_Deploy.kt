@@ -50,6 +50,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
             buildTypeExtId = Quinoa_2_Doc_Build_Release.extId
             successfulOnly = true
             branchFilter = """
+                +:<default>
                 +:develop
             """.trimIndent()
         }
@@ -57,6 +58,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
             buildTypeExtId = Quinoa_2_Doc_Build_Debug.extId
             successfulOnly = true
             branchFilter = """
+                +:<default>
                 +:develop
             """.trimIndent()
         }
