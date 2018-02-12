@@ -35,10 +35,10 @@ object Quinoa_2_Doc_Deploy : BuildType({
             name = "Push documentation, code coverage, and static analysis reports"
             id = "RUNNER_32"
             scriptContent = """
-                git rm -f .
+                git rm -f *
                 mv Release/html/* Release/html/.nojekyll .
                 rm -rf Release/html Debug/html
-                git add .
+                git add *
                 git commit -m "Documentation for commit %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster%"
                 git push
             """.trimIndent()
