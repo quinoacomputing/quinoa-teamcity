@@ -17,7 +17,6 @@ object Quinoa_2_Doc_Deploy : BuildType({
     description = "Deploy documentation, code coverage, and static analysis reports"
 
     vcs {
-        root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoacomputingGithubIoGitRefsHeadsMaster)
     }
 
@@ -26,20 +25,20 @@ object Quinoa_2_Doc_Deploy : BuildType({
             name = "Combine documentation, code coverage and static analysis reports"
             id = "RUNNER_31"
             scriptContent = """
-                rm -rf Release Debug
-                mv newRelease Release
-                mv newDebug Debug
+                rm -rf * .nojekyll
+                mkdir Debug && tar xzf NewCoverage/Debug.tgz -C Debug
+                mkdir Release && tar xzf NewCoverage/Release.tgz -C Release
+                rm -rf NewCoverage
+                mv Release/html/* Release/html/.nojekyll .
+                rm -rf Release/html Debug/html
             """.trimIndent()
         }
         script {
             name = "Push documentation, code coverage, and static analysis reports"
             id = "RUNNER_32"
             scriptContent = """
-                git rm -f *
-                mv Release/html/* Release/html/.nojekyll .
-                rm -rf Release/html Debug/html
-                git add *
-                git commit -m "Documentation for commit %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster%"
+                git add .
+                git commit -m "Documentation for commit `cat sha1`"
                 git push
             """.trimIndent()
         }
@@ -72,7 +71,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
             }
 
             artifacts {
-                artifactRules = "Release => newRelease"
+                artifactRules = "Release.tgz => NewCoverage"
             }
         }
         dependency(Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Debug) {
@@ -82,7 +81,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
             }
 
             artifacts {
-                artifactRules = "Debug => newDebug"
+                artifactRules = "Debug.tgz => NewCoverage"
             }
         }
     }

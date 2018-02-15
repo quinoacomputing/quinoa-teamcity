@@ -14,7 +14,7 @@ object Quinoa_2_Doc_Matrix : Template({
     extId = "Quinoa_2_Doc_Matrix"
     name = "Matrix"
 
-    artifactRules = "%buildtype% => %buildtype%"
+    artifactRules = "%buildtype% => %buildtype%.tgz"
 
     vcs {
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster)
@@ -90,7 +90,7 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${cmakeCmd}
                 ${makeCmd} doc
                 rm -rf ../%buildtype%/html
-                cd doc/html && touch .nojekyll && cp ../../../doc/images/* . && mv ../../../README.md . && cd -
+                cd doc/html && touch .nojekyll && echo %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster% > sha1 && cp ../../../doc/images/* . && mv ../../../README.md . && cd -
                 mv doc/html ../%buildtype%
             """.trimIndent()
         }
