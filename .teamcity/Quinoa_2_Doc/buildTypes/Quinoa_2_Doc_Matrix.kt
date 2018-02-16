@@ -108,6 +108,8 @@ object Quinoa_2_Doc_Matrix : Template({
                 +:.
                 -:comment=\[ci skip\]:**
                 -:comment=\[skip ci\]:**
+                -:comment=\[CI SKIP\]:**
+                -:comment=\[SKIP CI\]:**
             """.trimIndent()
             branchFilter = """
                 +:<default>

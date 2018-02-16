@@ -56,6 +56,8 @@ object Quinoa_2_Docker_Image : Template({
                 +:.
                 -:comment=\[ci skip\]:**
                 -:comment=\[skip ci\]:**
+                -:comment=\[CI SKIP\]:**
+                -:comment=\[SKIP CI\]:**
             """.trimIndent()
             branchFilter = """
                 +:<default>
