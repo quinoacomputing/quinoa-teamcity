@@ -2,12 +2,12 @@ package Quinoa_2_Mac
 
 import Quinoa_2_Mac.buildTypes.*
 import Quinoa_2_Mac.buildParams.*
-import jetbrains.buildServer.configs.kotlin.v10.*
-import jetbrains.buildServer.configs.kotlin.v10.Project
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.Project
 
 object Project : Project({
     uuid = "7b46bd08-3540-4fa1-ab86-d238159396f3"
-    extId = "Quinoa_2_Mac"
+    id = "Quinoa_2_Mac"
     parentId = "Quinoa_2"
     name = "Mac"
     description = "Mac builds"

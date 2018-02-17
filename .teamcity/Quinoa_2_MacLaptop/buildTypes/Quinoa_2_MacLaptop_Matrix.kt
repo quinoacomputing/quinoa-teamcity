@@ -1,16 +1,12 @@
 package Quinoa_2_MacLaptop.buildTypes
 
-import jetbrains.buildServer.configs.kotlin.v10.*
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep.*
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v10.triggers.VcsTrigger
-import jetbrains.buildServer.configs.kotlin.v10.triggers.VcsTrigger.*
-import jetbrains.buildServer.configs.kotlin.v10.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 
 object Quinoa_2_MacLaptop_Matrix : Template({
     uuid = "75d8a7e0-9c7c-4bc4-9cbb-3d1d8e58febd"
-    extId = "Quinoa_2_MacLaptop_Matrix"
+    id = "Quinoa_2_MacLaptop_Matrix"
     name = "Matrix"
 
     vcs {

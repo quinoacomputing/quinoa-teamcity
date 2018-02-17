@@ -1,12 +1,12 @@
 package Quinoa_2_Doc
 
 import Quinoa_2_Doc.buildTypes.*
-import jetbrains.buildServer.configs.kotlin.v10.*
-import jetbrains.buildServer.configs.kotlin.v10.Project
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.Project
 
 object Project : Project({
     uuid = "19ac1646-b1ed-4d1f-bed9-a16af3458062"
-    extId = "Quinoa_2_Doc"
+    id = "Quinoa_2_Doc"
     parentId = "Quinoa_2"
     name = "Doc"
     description = "Documentation and code coverage builds"

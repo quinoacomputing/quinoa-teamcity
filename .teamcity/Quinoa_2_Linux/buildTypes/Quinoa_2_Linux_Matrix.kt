@@ -1,16 +1,12 @@
 package Quinoa_2_Linux.buildTypes
 
-import jetbrains.buildServer.configs.kotlin.v10.*
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep.*
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v10.triggers.VcsTrigger
-import jetbrains.buildServer.configs.kotlin.v10.triggers.VcsTrigger.*
-import jetbrains.buildServer.configs.kotlin.v10.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 
 object Quinoa_2_Linux_Matrix : Template({
     uuid = "dfd6c8ef-72e2-4e44-be66-fea7a62d455e"
-    extId = "Quinoa_2_Linux_Matrix"
+    id = "Quinoa_2_Linux_Matrix"
     name = "Matrix"
 
     vcs {

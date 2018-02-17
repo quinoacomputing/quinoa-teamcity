@@ -1,12 +1,12 @@
 package Quinoa_2_Docker
 
 import Quinoa_2_Docker.buildTypes.*
-import jetbrains.buildServer.configs.kotlin.v10.*
-import jetbrains.buildServer.configs.kotlin.v10.Project
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.Project
 
 object Project : Project({
     uuid = "79eec645-d3ee-40df-8bb5-85abc2b6d8f0"
-    extId = "Quinoa_2_Docker"
+    id = "Quinoa_2_Docker"
     parentId = "Quinoa_2"
     name = "Docker"
     description = "Docker images"

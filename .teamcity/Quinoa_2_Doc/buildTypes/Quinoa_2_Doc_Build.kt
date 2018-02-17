@@ -1,7 +1,7 @@
 package Quinoa_2_Doc.buildTypes
 
 import Quinoa_2_Doc.buildParams.*
-import jetbrains.buildServer.configs.kotlin.v10.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
 
 class Quinoa_2_Doc_Build( bp: BuildParams ) : BuildType({
 

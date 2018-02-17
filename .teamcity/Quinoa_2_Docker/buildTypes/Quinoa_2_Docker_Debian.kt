@@ -1,11 +1,11 @@
 package Quinoa_2_Docker.buildTypes
 
-import jetbrains.buildServer.configs.kotlin.v10.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
 
 object Quinoa_2_Docker_Debian : BuildType({
     template(Quinoa_2_Docker.buildTypes.Quinoa_2_Docker_Image)
     uuid = "95961fba-6827-45d0-af17-46b9368f76d3"
-    extId = "Quinoa_2_Docker_Debian"
+    id = "Quinoa_2_Docker_Debian"
     name = "Debian"
     description = "quinoacomputing/quinoa:debian@hub.docker.com"
 

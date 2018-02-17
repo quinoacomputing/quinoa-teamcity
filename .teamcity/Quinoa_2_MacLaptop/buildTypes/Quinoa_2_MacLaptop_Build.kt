@@ -1,7 +1,7 @@
 package Quinoa_2_MacLaptop.buildTypes
 
 import Quinoa_2_MacLaptop.buildParams.*
-import jetbrains.buildServer.configs.kotlin.v10.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
 
 class Quinoa_2_MacLaptop_Build( bp: BuildParams ) : BuildType({
 

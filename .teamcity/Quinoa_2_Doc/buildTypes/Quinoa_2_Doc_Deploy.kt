@@ -1,18 +1,14 @@
 package Quinoa_2_Doc.buildTypes
 
-import Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Release
 import Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Debug
-import jetbrains.buildServer.configs.kotlin.v10.*
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.ScriptBuildStep.*
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v10.triggers.FinishBuildTrigger
-import jetbrains.buildServer.configs.kotlin.v10.triggers.FinishBuildTrigger.*
-import jetbrains.buildServer.configs.kotlin.v10.triggers.finishBuildTrigger
+import Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Release
+import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.finishBuildTrigger
 
 object Quinoa_2_Doc_Deploy : BuildType({
     uuid = "7674b556-609f-4375-be3d-45ea9b1f380c"
-    extId = "Quinoa_2_Doc_Deploy"
+    id = "Quinoa_2_Doc_Deploy"
     name = "Deploy"
     description = "Deploy documentation, code coverage, and static analysis reports"
 
@@ -23,7 +19,6 @@ object Quinoa_2_Doc_Deploy : BuildType({
     steps {
         script {
             name = "Combine documentation, code coverage and static analysis reports"
-            id = "RUNNER_31"
             scriptContent = """
                 rm -rf * .nojekyll
                 mkdir Debug && tar xzf NewCoverage/Debug.tgz -C Debug
@@ -35,7 +30,6 @@ object Quinoa_2_Doc_Deploy : BuildType({
         }
         script {
             name = "Push documentation, code coverage, and static analysis reports"
-            id = "RUNNER_32"
             scriptContent = """
                 git add .
                 git commit -m "Documentation for commit `cat sha1`"
@@ -46,7 +40,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
 
     triggers {
         finishBuildTrigger {
-            buildTypeExtId = Quinoa_2_Doc_Build_Release.extId
+            buildTypeExtId = Quinoa_2_Doc_Build_Release.id
             successfulOnly = true
             branchFilter = """
                 +:<default>
@@ -54,7 +48,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
             """.trimIndent()
         }
         finishBuildTrigger {
-            buildTypeExtId = Quinoa_2_Doc_Build_Debug.extId
+            buildTypeExtId = Quinoa_2_Doc_Build_Debug.id
             successfulOnly = true
             branchFilter = """
                 +:<default>
@@ -64,16 +58,6 @@ object Quinoa_2_Doc_Deploy : BuildType({
     }
 
     dependencies {
-        dependency(Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Release) {
-            snapshot {
-                runOnSameAgent = true
-                onDependencyFailure = FailureAction.FAIL_TO_START
-            }
-
-            artifacts {
-                artifactRules = "Release.tgz => NewCoverage"
-            }
-        }
         dependency(Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Debug) {
             snapshot {
                 runOnSameAgent = true
@@ -82,6 +66,16 @@ object Quinoa_2_Doc_Deploy : BuildType({
 
             artifacts {
                 artifactRules = "Debug.tgz => NewCoverage"
+            }
+        }
+        dependency(Quinoa_2_Doc.buildTypes.Quinoa_2_Doc_Build_Release) {
+            snapshot {
+                runOnSameAgent = true
+                onDependencyFailure = FailureAction.FAIL_TO_START
+            }
+
+            artifacts {
+                artifactRules = "Release.tgz => NewCoverage"
             }
         }
     }
