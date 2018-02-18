@@ -18,9 +18,9 @@ object Quinoa_2_Doc_Deploy : BuildType({
 
     steps {
         script {
-            name = "Combine documentation, code coverage and static analysis reports"
+            name = "Combine documentation, code coverage, and static analysis reports"
             scriptContent = """
-                rm -rf * .nojekyll
+                rm -rf Debug Release
                 mkdir Debug && tar xzf NewCoverage/Debug.tgz -C Debug
                 mkdir Release && tar xzf NewCoverage/Release.tgz -C Release
                 rm -rf NewCoverage
@@ -31,7 +31,8 @@ object Quinoa_2_Doc_Deploy : BuildType({
         script {
             name = "Push documentation, code coverage, and static analysis reports"
             scriptContent = """
-                git add .
+                git add --all .
+                git reset HEAD sha1
                 git commit -m "Documentation for commit `cat sha1`"
                 git push
             """.trimIndent()
