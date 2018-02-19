@@ -10,6 +10,26 @@ accordingly and delete the patch script.
 */
 changeBuildType("7674b556-609f-4375-be3d-45ea9b1f380c") {
     dependencies {
+        expect("Quinoa_2_Doc_Build_Debug") {
+            snapshot {
+                runOnSameAgent = true
+                onDependencyFailure = FailureAction.FAIL_TO_START
+            }
+
+            artifacts {
+                artifactRules = "Debug.tgz => NewCoverage"
+            }
+        }
+        update("Quinoa_2_Doc_Build_Debug") {
+            snapshot {
+                onDependencyFailure = FailureAction.FAIL_TO_START
+            }
+
+            artifacts {
+                artifactRules = "Debug.tgz => NewCoverage"
+            }
+        }
+
         expect("Quinoa_2_Doc_Build_Release") {
             snapshot {
                 runOnSameAgent = true
