@@ -12,4 +12,8 @@ object Quinoa_2_Doc_Build_Debug : BuildType({
     params {
         param("buildtype", "Debug")
     }
+
+    requirements {
+        contains("teamcity.agent.name", "ccscs3-14", "RQ_27")
+   }
 })

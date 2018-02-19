@@ -94,7 +94,6 @@ object Quinoa_2_Doc_Matrix : Template({
 
     requirements {
         equals("teamcity.agent.jvm.os.name", "Linux", "RQ_19")
-        contains("teamcity.agent.name", "ccscs3-14", "RQ_27")
     }
 
     triggers {

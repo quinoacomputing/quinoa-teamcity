@@ -12,4 +12,8 @@ object Quinoa_2_Doc_Build_Release : BuildType({
     params {
         param("buildtype", "Release")
     }
+
+    requirements {
+        contains("teamcity.agent.name", "ccscs2-12", "RQ_28")
+   }
 })
