@@ -41,7 +41,7 @@ object Quinoa_2_MacNew_Matrix : Template({
             workingDir = "build"
             scriptContent = """
                 ${stepPrefix}
-                ../script/run_tests.sh 24 -oversubscribe
+                ../script/run_tests.sh %teamcity.agent.hardware.cpuCount% -oversubscribe
             """.trimIndent()
         }
     }
