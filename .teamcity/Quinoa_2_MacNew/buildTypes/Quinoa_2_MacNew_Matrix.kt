@@ -48,7 +48,7 @@ object Quinoa_2_MacNew_Matrix : Template({
 
     requirements {
         equals("teamcity.agent.jvm.os.name", "Mac OS X", "RQ_21")
-        contains("teamcity.agent.name", "neumann", "RQ_22")
+        contains("teamcity.agent.name", "pn1716416", "RQ_22")
     }
 
     triggers {
