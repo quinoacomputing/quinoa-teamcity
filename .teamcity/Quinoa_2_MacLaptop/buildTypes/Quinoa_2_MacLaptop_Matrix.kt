@@ -51,7 +51,7 @@ object Quinoa_2_MacLaptop_Matrix : Template({
         contains("teamcity.agent.name", "neumann", "RQ_22")
     }
 
-    triggers {
+/*    triggers {
         vcs {
             id = "vcsTrigger"
             triggerRules = """
@@ -66,5 +66,5 @@ object Quinoa_2_MacLaptop_Matrix : Template({
                 +:develop
             """.trimIndent()
         }
-    }
+    } */
 })
