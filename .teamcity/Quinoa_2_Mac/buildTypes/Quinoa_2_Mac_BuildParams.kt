@@ -1,4 +1,4 @@
-package Quinoa_2_MacNew.buildParams
+package Quinoa_2_Mac.buildParams
 
 enum class CmakeBuildType { Debug, Release }
 enum class Compiler { clang, gnu }

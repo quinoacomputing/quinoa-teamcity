@@ -1,18 +1,18 @@
-package Quinoa_2_MacNew
+package Quinoa_2_Mac
 
-import Quinoa_2_MacNew.buildTypes.*
-import Quinoa_2_MacNew.buildParams.*
+import Quinoa_2_Mac.buildTypes.*
+import Quinoa_2_Mac.buildParams.*
 import jetbrains.buildServer.configs.kotlin.v2017_2.*
 import jetbrains.buildServer.configs.kotlin.v2017_2.Project
 
 object Project : Project({
     uuid = "7b48bd08-3540-4fa1-ac86-d2381593f6f3"
-    id = "Quinoa_2_MacNew"
+    id = "Quinoa_2_Mac"
     parentId = "Quinoa_2"
-    name = "MacNew"
-    description = "MacNew builds"
+    name = "Mac"
+    description = "Mac builds"
 
-    template(Quinoa_2_MacNew_Matrix)
+    template(Quinoa_2_Mac_Matrix)
     val allBuilds = mutableListOf< BuildParams >()
 
     // Generate matrix with all possible combinations of build parameters
@@ -38,5 +38,5 @@ object Project : Project({
     }
 
     // Generate TeamCity builds
-    builds.forEach{ buildType( Quinoa_2_MacNew_Build(it) ) }
+    builds.forEach{ buildType( Quinoa_2_Mac_Build(it) ) }
 })

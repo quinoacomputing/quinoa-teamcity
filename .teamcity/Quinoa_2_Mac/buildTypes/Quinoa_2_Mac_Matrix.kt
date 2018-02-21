@@ -1,12 +1,12 @@
-package Quinoa_2_MacNew.buildTypes
+package Quinoa_2_Mac.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2017_2.*
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.vcs
 
-object Quinoa_2_MacNew_Matrix : Template({
+object Quinoa_2_Mac_Matrix : Template({
     uuid = "75d8a7e0-9c7c-4bc4-9cbb-3d1d8e5ffebd"
-    id = "Quinoa_2_MacNew_Matrix"
+    id = "Quinoa_2_Mac_Matrix"
     name = "Matrix"
 
     vcs {

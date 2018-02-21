@@ -1,4 +1,4 @@
-package Quinoa_2_MacNew
+package Quinoa_2_Mac
 
 import jetbrains.buildServer.configs.kotlin.v2017_2.*
 
@@ -32,4 +32,4 @@ the 'Debug' option is available in the context menu for the task.
 */
 
 version = "2017.2"
-project(Quinoa_2_MacNew.Project)
+project(Quinoa_2_Mac.Project)
