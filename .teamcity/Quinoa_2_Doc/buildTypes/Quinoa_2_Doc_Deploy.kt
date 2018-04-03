@@ -32,6 +32,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
         script {
             name = "Push documentation, code coverage, and static analysis reports"
             scriptContent = """
+                git pull
                 git add --all .
                 git reset HEAD sha1
                 git commit -m "Documentation for commit `cat sha1`"
