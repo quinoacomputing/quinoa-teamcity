@@ -75,7 +75,6 @@ object Quinoa_2_Linux_Matrix : Template({
             branchFilter = """
                 +:<default>
                 +:develop
-                +:elemdiagnostics
             """.trimIndent()
         }
     }
