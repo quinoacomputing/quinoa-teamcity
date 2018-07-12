@@ -16,19 +16,13 @@ object Project : Project({
     val allBuilds = mutableListOf< BuildParams >()
 
     // Generate matrix with all possible combinations of build parameters
-    // without ROOT, defined in package buildParams.
+    // defined in package buildParams.
     CmakeBuildType.values().forEach{ b ->
       Compiler.values().forEach{ c ->
-        allBuilds.add( BuildParams(b,c,false,false,"") )
-        allBuilds.add( BuildParams(b,c,false,true,"-rndq") )
+        allBuilds.add( BuildParams(b,c,false,"") )
+        allBuilds.add( BuildParams(b,c,true,"-rndq") )
       }
     }
-
-    // Add ROOT builds
-    allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, false, "" ) )
-    allBuilds.add( BuildParams( CmakeBuildType.Debug, Compiler.clang, true, true, "-rndq" ) )
-    allBuilds.add( BuildParams( CmakeBuildType.Release, Compiler.clang, true, false, "" ) )
-    allBuilds.add( BuildParams( CmakeBuildType.Release, Compiler.clang, true, true, "-rndq" ) )
 
     val builds = mutableListOf< BuildParams >()
 
