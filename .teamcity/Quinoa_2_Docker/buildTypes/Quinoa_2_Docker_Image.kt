@@ -57,6 +57,7 @@ object Quinoa_2_Docker_Image : Template({
             """.trimIndent()
             branchFilter = """
                 +:<default>
+                +:develop
             """.trimIndent()
         }
     }
