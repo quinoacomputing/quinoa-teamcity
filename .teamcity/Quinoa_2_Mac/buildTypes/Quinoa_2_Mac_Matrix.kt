@@ -15,8 +15,8 @@ object Quinoa_2_Mac_Matrix : Template({
     }
 
     val stepPrefix = """
-      [ %compiler% == clang ] && port select clang mp-clang-3.9 && port select mpi openmpi-clang39-fortran
-      [ %compiler% == gnu ] && port select gcc mp-gcc5 && port select mpi openmpi-gcc5-fortran
+      [ %compiler% == clang ] && port select clang mp-clang-6.0 && port select mpi openmpi-clang60-fortran
+      [ %compiler% == gnu ] && port select gcc mp-gcc7 && port select mpi openmpi-gcc7-fortran
     """.trimIndent()
 
     steps {
