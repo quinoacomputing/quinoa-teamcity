@@ -32,7 +32,9 @@ object Quinoa_2_Mac_Matrix : Template({
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=/Users/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64%tpl% -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ../src
+                ccache -z
                 make -j%teamcity.agent.hardware.cpuCount%
+                ccache -s
             """.trimIndent()
         }
         script {

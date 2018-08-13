@@ -43,7 +43,9 @@ object Quinoa_2_Linux_Matrix : Template({
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
                 cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DSTDLIBCPP=%stdlibcpp% -DCMAKE_DISABLE_FIND_PACKAGE_RNGSSE2=!%rngsse2% -DCMAKE_DISABLE_FIND_PACKAGE_TestU01=!%testu01% -DCMAKE_CXX_FLAGS=-Werror -DCMAKE_CXX_COMPILER_LAUNCHER=ccache-swig ../src
+                ccache -z
                 make -j16
+                ccache -s
             """.trimIndent()
         }
         script {
