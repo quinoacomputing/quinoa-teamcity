@@ -18,7 +18,7 @@ object Quinoa_2_Doc_Matrix : Template({
 
     val stepPrefix = """
         . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
-        module load openmpi-3.0.0-gcc-4.8.5-fcuaicj hdf5-1.10.1-gcc-4.8.5-rosmsxt netcdf-4.4.1.1-gcc-4.8.5-4rodz7d hypre-2.12.1-gcc-4.8.5-f34qmcg root/gnu mkl/2018 rngsse2 testu01 charm/gnu-libstdc++ h5part/gnu trilinos/gnu-libstdc++/mkl pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-3.0.1-gcc-4.8.5-xqrg5fi random123 tut numdiff highwayhash omega_h/gnu-libstdc++ backward-cpp brigand
+        module load openmpi-3.0.0-gcc-4.8.5-fcuaicj hdf5-1.10.1-gcc-4.8.5-rosmsxt netcdf-4.4.1.1-gcc-4.8.5-4rodz7d hypre-2.12.1-gcc-4.8.5-f34qmcg root/gnu mkl/2018 rngsse2 testu01 charm/gnu-libstdc++ h5part/gnu trilinos/gnu-libstdc++/mkl pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-3.0.1-gcc-4.8.5-xqrg5fi random123 tut numdiff highwayhash omega_h/gnu-libstdc++ backward-cpp brigand doxygen mcss python-3.6.5-gcc-4.8.5-3gahby7
         module list
         rm -rf build && mkdir build && cd build
         """.trimIndent()
