@@ -27,7 +27,7 @@ object Quinoa_2_Linux_Matrix : Template({
       [ %rndq% == true ] && module load charm-rndq/%compiler%-%stdlibcpp%
       [ %rndq% == false ] && module load charm/%compiler%-%stdlibcpp%
       module load h5part/%compiler% trilinos/%compiler%-%stdlibcpp%/%mathlib% omega_h/%compiler%-%stdlibcpp%
-      module load pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-3.0.6-gcc-4.8.5-n34xdqr random123 tut numdiff libc++ backward-cpp highwayhash brigand
+      module load pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-3.0.6-gcc-4.8.5-n34xdqr random123 tut numdiff libc++ backward-cpp highwayhash brigand ccache-3.1.12-gcc-4.8.5-h7iisha
       module list""".trimIndent()
 
     steps {
@@ -42,7 +42,7 @@ object Quinoa_2_Linux_Matrix : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DSTDLIBCPP=%stdlibcpp% -DCMAKE_DISABLE_FIND_PACKAGE_RNGSSE2=!%rngsse2% -DCMAKE_DISABLE_FIND_PACKAGE_TestU01=!%testu01% -DCMAKE_CXX_FLAGS=-Werror ../src && make -j8
+                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DSTDLIBCPP=%stdlibcpp% -DCMAKE_DISABLE_FIND_PACKAGE_RNGSSE2=!%rngsse2% -DCMAKE_DISABLE_FIND_PACKAGE_TestU01=!%testu01% -DCMAKE_CXX_FLAGS=-Werror -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ../src && ccache -z && make -j8 && ccache -s
             """.trimIndent()
         }
         script {
