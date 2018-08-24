@@ -18,7 +18,7 @@ object Quinoa_2_Doc_Matrix : Template({
 
     val stepPrefix = """
         . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
-        module load openmpi-3.0.0-gcc-4.8.5-fcuaicj hdf5-1.10.1-gcc-4.8.5-rosmsxt netcdf-4.4.1.1-gcc-4.8.5-4rodz7d hypre-2.12.1-gcc-4.8.5-f34qmcg root/gnu mkl/2018 rngsse2 testu01 charm/gnu-libstdc++ h5part/gnu trilinos/gnu-libstdc++/mkl pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-3.0.1-gcc-4.8.5-xqrg5fi random123 tut numdiff highwayhash omega_h/gnu-libstdc++ backward-cpp brigand doxygen mcss python-3.6.5-gcc-4.8.5-3gahby7 py-jinja2-2.9.6-gcc-4.8.5-c3xwcj5 py-pygments-2.2.0-gcc-4.8.5-alkmyw7 py-markupsafe-1.0-gcc-4.8.5-5qh4ssa
+        module load openmpi-3.0.0-gcc-4.8.5-fcuaicj hdf5-1.10.1-gcc-4.8.5-rosmsxt netcdf-4.4.1.1-gcc-4.8.5-4rodz7d hypre-2.12.1-gcc-4.8.5-f34qmcg root/gnu mkl/2018 rngsse2 testu01 charm/gnu-libstdc++ h5part/gnu trilinos/gnu-libstdc++/mkl pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-3.0.1-gcc-4.8.5-xqrg5fi random123 tut numdiff highwayhash omega_h/gnu-libstdc++ backward-cpp brigand doxygen mcss python-3.6.5-gcc-4.8.5-3gahby7 py-jinja2-2.9.6-gcc-4.8.5-c3xwcj5 py-pygments-2.2.0-gcc-4.8.5-alkmyw7 py-markupsafe-1.0-gcc-4.8.5-5qh4ssa texlive-live-gcc-4.8.5-ojsyovg
         module list
         rm -rf build && mkdir build && cd build
         """.trimIndent()
@@ -86,7 +86,7 @@ object Quinoa_2_Doc_Matrix : Template({
                 ${cmakeCmd}
                 ${makeCmd} doc
                 rm -rf ../%buildtype%/html
-                cd doc/html && touch .nojekyll && echo %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster% > sha1 && cp ../../../doc/images/* . && mv ../../../README.md . && cd -
+                cd doc/html && touch .nojekyll && echo %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster% > sha1 && cp ../../../doc/images/* . && cd -
                 mv doc/html ../%buildtype%
             """.trimIndent()
         }
