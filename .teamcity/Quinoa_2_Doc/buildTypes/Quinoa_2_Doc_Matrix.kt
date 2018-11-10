@@ -82,12 +82,7 @@ object Quinoa_2_Doc_Matrix : Template({
             name = "Generate documentation"
             id = "RUNNER_22"
             scriptContent = """
-                ${stepPrefix}
-                ${cmakeCmd}
-                ${makeCmd} doc
-                rm -rf ../%buildtype%/html
-                cd doc/html && touch .nojekyll && echo %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster% > sha1 && cp ../../../doc/images/* . && cd -
-                mv doc/html ../%buildtype%
+                ${stepPrefix} && ${cmakeCmd} && ${makeCmd} doc && rm -rf ../%buildtype%/html && cd doc/html && touch .nojekyll && echo %build.vcs.number.Quinoa_2_GitGithubComQuinoacomputingQuinoaGitRefsHeadsMaster% > sha1 && cp ../../../doc/images/* . && cd - && mv doc/html ../%buildtype%
             """.trimIndent()
         }
     }
