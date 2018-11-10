@@ -33,51 +33,51 @@ object Quinoa_2_Doc_Matrix : Template({
             id = "RUNNER_17"
             scriptContent = """/ccs/opt/git/bin/git verify-commit %build.vcs.number% 2>&1 | grep "Good signature""""
         }
-        script {
-            name = "Generate unit test coverage"
-            id = "RUNNER_18"
-            scriptContent = """
-                ${stepPrefix}
-                ${cmakeCmd}
-                ${makeCmd} unittest_coverage
-                mkdir -p ../%buildtype%
-                rm -rf ../%buildtype%/unittest_coverage
-                mv doc/html/unittest_coverage ../%buildtype%
-            """.trimIndent()
-        }
-        script {
-            name = "Generate regression test coverage"
-            id = "RUNNER_19"
-            scriptContent = """
-                ${stepPrefix}
-                ${cmakeCmd}
-                ${makeCmd} regression_coverage
-                rm -rf ../%buildtype%/regression_coverage
-                mv doc/html/regression_coverage ../%buildtype%
-            """.trimIndent()
-        }
-        script {
-            name = "Generate full test coverage"
-            id = "RUNNER_20"
-            scriptContent = """
-                ${stepPrefix}
-                ${cmakeCmd}
-                ${makeCmd} test_coverage
-                rm -rf ../%buildtype%/test_coverage
-                mv doc/html/test_coverage ../%buildtype%
-            """.trimIndent()
-        }
-        script {
-            name = "Generate cppcheck static analysis report"
-            id = "RUNNER_21"
-            scriptContent = """
-                ${stepPrefix}
-                ${cmakeCmd}
-                ${makeCmd} cppcheck
-                rm -rf ../%buildtype%/cppcheck
-                mv doc/cppcheck ../%buildtype%
-            """.trimIndent()
-        }
+//        script {
+//            name = "Generate unit test coverage"
+//            id = "RUNNER_18"
+//            scriptContent = """
+//                ${stepPrefix}
+//                ${cmakeCmd}
+//                ${makeCmd} unittest_coverage
+//                mkdir -p ../%buildtype%
+//                rm -rf ../%buildtype%/unittest_coverage
+//                mv doc/html/unittest_coverage ../%buildtype%
+//            """.trimIndent()
+//        }
+//        script {
+//            name = "Generate regression test coverage"
+//            id = "RUNNER_19"
+//            scriptContent = """
+//                ${stepPrefix}
+//                ${cmakeCmd}
+//                ${makeCmd} regression_coverage
+//                rm -rf ../%buildtype%/regression_coverage
+//                mv doc/html/regression_coverage ../%buildtype%
+//            """.trimIndent()
+//        }
+//        script {
+//            name = "Generate full test coverage"
+//            id = "RUNNER_20"
+//            scriptContent = """
+//                ${stepPrefix}
+//                ${cmakeCmd}
+//                ${makeCmd} test_coverage
+//                rm -rf ../%buildtype%/test_coverage
+//                mv doc/html/test_coverage ../%buildtype%
+//            """.trimIndent()
+//        }
+//        script {
+//            name = "Generate cppcheck static analysis report"
+//            id = "RUNNER_21"
+//            scriptContent = """
+//                ${stepPrefix}
+//                ${cmakeCmd}
+//                ${makeCmd} cppcheck
+//                rm -rf ../%buildtype%/cppcheck
+//                mv doc/cppcheck ../%buildtype%
+//            """.trimIndent()
+//        }
         script {
             name = "Generate documentation"
             id = "RUNNER_22"

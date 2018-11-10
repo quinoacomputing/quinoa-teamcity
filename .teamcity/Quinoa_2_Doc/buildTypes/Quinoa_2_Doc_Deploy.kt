@@ -16,6 +16,9 @@ object Quinoa_2_Doc_Deploy : BuildType({
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoacomputingGithubIoGitRefsHeadsMaster)
     }
 
+//                rm -rf NewCoverage
+//                mv Release/html/* Release/html/.nojekyll .
+//                rm -rf Release/html Debug/html
     steps {
         script {
             name = "Combine documentation, code coverage, and static analysis reports"
@@ -24,21 +27,18 @@ object Quinoa_2_Doc_Deploy : BuildType({
                 rm -rf .nojekyll !(NewCoverage)
                 mkdir Debug && tar xzf NewCoverage/Debug.tgz -C Debug
                 mkdir Release && tar xzf NewCoverage/Release.tgz -C Release
-                rm -rf NewCoverage
-                mv Release/html/* Release/html/.nojekyll .
-                rm -rf Release/html Debug/html
             """.trimIndent()
         }
-        script {
-            name = "Push documentation, code coverage, and static analysis reports"
-            scriptContent = """
-                git pull
-                git add --all .
-                git reset HEAD sha1
-                git commit -m "Documentation for commit `cat sha1`"
-                git push
-            """.trimIndent()
-        }
+//        script {
+//            name = "Push documentation, code coverage, and static analysis reports"
+//            scriptContent = """
+//                git pull
+//                git add --all .
+//                git reset HEAD sha1
+//                git commit -m "Documentation for commit `cat sha1`"
+//                git push
+//            """.trimIndent()
+//        }
     }
 
     triggers {
