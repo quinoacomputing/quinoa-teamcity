@@ -2,6 +2,7 @@ package Quinoa_2_Docker.patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2017_2.*
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2017_2.ui.*
 
 /*
@@ -28,6 +29,16 @@ changeBuildType("95961fba-6827-45d0-af17-46b9368f76d3") {
             "Unexpected build steps order: $stepsOrder"
         }
         stepsOrder = arrayListOf("RUNNER_33", "RUNNER_23", "RUNNER_24", "RUNNER_30", "RUNNER_32")
+    }
+
+    triggers {
+        add {
+            finishBuildTrigger {
+                id = "TRIGGER_3"
+                buildTypeExtId = "Quinoa_2_Docker_Alpine"
+                successfulOnly = true
+            }
+        }
     }
 
     expectDisabledSettings()
