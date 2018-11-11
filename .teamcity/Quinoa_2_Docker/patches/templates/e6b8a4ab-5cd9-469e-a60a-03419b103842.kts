@@ -1,6 +1,7 @@
 package Quinoa_2_Docker.patches.templates
 
 import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.v2017_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2017_2.ui.*
 
@@ -36,6 +37,10 @@ changeTemplate("e6b8a4ab-5cd9-469e-a60a-03419b103842") {
         }
     }
     steps {
+        update<ScriptBuildStep>(1) {
+            id = "RUNNER_24"
+            enabled = false
+        }
         insert(4) {
             script {
                 name = "Clean docker database"
