@@ -47,5 +47,9 @@ changeTemplate("e6b8a4ab-5cd9-469e-a60a-03419b103842") {
                 """.trimIndent()
             }
         }
+        check(stepsOrder == arrayListOf<String>()) {
+            "Unexpected build steps order: $stepsOrder"
+        }
+        stepsOrder = arrayListOf("RUNNER_23", "RUNNER_24", "RUNNER_30", "RUNNER_32", "RUNNER_34")
     }
 }
