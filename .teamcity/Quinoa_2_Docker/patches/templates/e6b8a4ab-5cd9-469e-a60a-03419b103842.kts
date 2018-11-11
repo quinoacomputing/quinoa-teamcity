@@ -54,9 +54,9 @@ changeTemplate("e6b8a4ab-5cd9-469e-a60a-03419b103842") {
                 name = "Clean docker database"
                 id = "RUNNER_34"
                 scriptContent = """
-                    docker rmi -f ${'$'}(docker images -q --filter "dangling=true")
-                    docker rmi -f ${'$'}(docker images | grep "<none>" | awk "{print \${'$'}3}")
-                    docker rm `docker ps -a | grep Exited | awk '{print ${'$'}1 }'`
+                    docker rmi -f ${'$'}(docker images -q --filter "dangling=true") || true
+                    docker rmi -f ${'$'}(docker images | grep "<none>" | awk "{print \${'$'}3}") || true
+                    docker rm `docker ps -a | grep Exited | awk '{print ${'$'}1 }'` || true
                 """.trimIndent()
             }
         }
