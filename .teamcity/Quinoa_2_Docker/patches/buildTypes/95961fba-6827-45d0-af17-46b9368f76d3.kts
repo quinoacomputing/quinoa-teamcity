@@ -17,7 +17,11 @@ changeBuildType("95961fba-6827-45d0-af17-46b9368f76d3") {
             script {
                 name = "Clean docker database"
                 id = "RUNNER_33"
-                scriptContent = """docker rmi -f ${'$'}(docker images -q --filter "dangling=true")"""
+                scriptContent = """
+                    docker rmi -f ${'$'}(docker images -q --filter "dangling=true")
+                    docker rmi -f ${'$'}(docker images | grep "<none>" | awk "{print \${'$'}3}")
+                    docker rm `docker ps -a | grep Exited | awk '{print ${'$'}1 }'`
+                """.trimIndent()
             }
         }
         check(stepsOrder == arrayListOf<String>()) {
