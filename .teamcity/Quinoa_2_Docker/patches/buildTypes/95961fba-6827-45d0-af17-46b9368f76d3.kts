@@ -37,6 +37,10 @@ changeBuildType("95961fba-6827-45d0-af17-46b9368f76d3") {
                 id = "TRIGGER_3"
                 buildTypeExtId = "Quinoa_2_Docker_Alpine"
                 successfulOnly = true
+                branchFilter = """
+                    +:<default>
+                    +:develop
+                """.trimIndent()
             }
         }
     }
