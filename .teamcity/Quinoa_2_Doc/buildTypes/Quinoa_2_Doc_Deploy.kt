@@ -20,7 +20,9 @@ object Quinoa_2_Doc_Deploy : BuildType({
         script {
             name = "Combine documentation, code coverage, and static analysis reports"
             scriptContent = """
-                shopt -s extglob && rm -rf .nojekyll !(NewCoverage) && mkdir Debug && tar xzf NewCoverage/Debug.tgz -C Debug && mkdir Release && tar xzf NewCoverage/Release.tgz -C Release && rm -rf NewCoverage && mv Release/html/* Release/html/.nojekyll . && rm -rf Release/html Debug/html
+                shopt -s extglob
+                rm -rf .nojekyll !(NewCoverage)
+                mkdir Debug && tar xzf NewCoverage/Debug.tgz -C Debug && mkdir Release && tar xzf NewCoverage/Release.tgz -C Release && rm -rf NewCoverage && mv Release/html/* Release/html/.nojekyll . && rm -rf Release/html Debug/html
             """.trimIndent()
         }
         script {
