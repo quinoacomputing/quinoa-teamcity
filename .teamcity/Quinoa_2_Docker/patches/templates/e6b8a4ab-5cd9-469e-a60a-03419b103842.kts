@@ -41,6 +41,14 @@ changeTemplate("e6b8a4ab-5cd9-469e-a60a-03419b103842") {
             id = "RUNNER_24"
             enabled = false
         }
+        update<ScriptBuildStep>(2) {
+            id = "RUNNER_30"
+            enabled = false
+        }
+        update<ScriptBuildStep>(3) {
+            id = "RUNNER_32"
+            enabled = false
+        }
         insert(4) {
             script {
                 name = "Clean docker database"
