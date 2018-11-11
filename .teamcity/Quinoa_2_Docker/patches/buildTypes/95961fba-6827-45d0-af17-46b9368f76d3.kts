@@ -29,4 +29,7 @@ changeBuildType("95961fba-6827-45d0-af17-46b9368f76d3") {
         }
         stepsOrder = arrayListOf("RUNNER_33", "RUNNER_23", "RUNNER_24", "RUNNER_30", "RUNNER_32")
     }
+
+    expectDisabledSettings()
+    updateDisabledSettings("vcsTrigger")
 }
