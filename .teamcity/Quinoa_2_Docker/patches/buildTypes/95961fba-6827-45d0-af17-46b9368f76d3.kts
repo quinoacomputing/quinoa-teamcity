@@ -45,6 +45,16 @@ changeBuildType("95961fba-6827-45d0-af17-46b9368f76d3") {
         }
     }
 
+    dependencies {
+        add("Quinoa_2_Docker_Alpine") {
+            snapshot {
+                onDependencyFailure = FailureAction.IGNORE
+                onDependencyCancel = FailureAction.IGNORE
+            }
+        }
+
+    }
+
     expectDisabledSettings()
     updateDisabledSettings("vcsTrigger")
 }
