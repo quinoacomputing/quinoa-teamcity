@@ -28,7 +28,7 @@ changeBuildType("95961fba-6827-45d0-af17-46b9368f76d3") {
         check(stepsOrder == arrayListOf<String>()) {
             "Unexpected build steps order: $stepsOrder"
         }
-        stepsOrder = arrayListOf("RUNNER_33", "RUNNER_23", "RUNNER_24", "RUNNER_30", "RUNNER_32")
+        stepsOrder = arrayListOf("RUNNER_33", "RUNNER_23", "RUNNER_24", "RUNNER_30", "RUNNER_32", "RUNNER_34")
     }
 
     triggers {
