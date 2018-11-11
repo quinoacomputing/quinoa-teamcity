@@ -20,5 +20,9 @@ changeBuildType("95961fba-6827-45d0-af17-46b9368f76d3") {
                 scriptContent = """docker rmi -f ${'$'}(docker images -q --filter "dangling=true")"""
             }
         }
+        check(stepsOrder == arrayListOf<String>()) {
+            "Unexpected build steps order: $stepsOrder"
+        }
+        stepsOrder = arrayListOf("RUNNER_33", "RUNNER_23", "RUNNER_24", "RUNNER_30", "RUNNER_32")
     }
 }
