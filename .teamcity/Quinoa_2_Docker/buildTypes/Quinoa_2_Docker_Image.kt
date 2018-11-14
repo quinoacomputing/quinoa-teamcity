@@ -30,13 +30,29 @@ object Quinoa_2_Docker_Image : Template({
             name = "Squash image"
             id = "RUNNER_30"
             workingDir = "%workdir%"
-            scriptContent = "/home/jbakosi/.local/bin/docker-squash --tmp-dir /scratch2/jbakosi/docker-squash-%tag% -t %organization%/%repository%:%tag% %organization%/%repository%-build:%tag%"
+            scriptContent = "/home/jbakosi/.local/bin/docker-squash --cleanup --tmp-dir /scratch2/jbakosi/docker-squash-%tag% -t %organization%/%repository%:%tag% %organization%/%repository%-build:%tag%"
         }
         script {
             name = "Push image"
             id = "RUNNER_32"
             workingDir = "%workdir%"
             scriptContent = "docker push %organization%/%repository%:%tag%"
+        }
+        script {
+            name = "Delete image"
+            id = "RUNNER_33"
+            workingDir = "%workdir%"
+            scriptContent = "docker rmi %organization%/%repository%:%tag%"
+        }
+        script {
+            name = "Clean docker"
+            id = "RUNNER_34"
+            workingDir = "%workdir%"
+            scriptContent = """
+                docker rmi -f ${'$'}(docker images -q --filter "dangling=true") || true
+                docker rmi -f ${'$'}(docker images | grep "<none>" | awk "{print \${'$'}3}") || true
+                docker rm `docker ps -a | grep Exited | awk '{print ${'$'}1 }'` || true
+            """
         }
     }
 

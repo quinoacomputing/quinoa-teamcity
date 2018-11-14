@@ -1,6 +1,7 @@
 package Quinoa_2_Docker.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2017_2.*
+import jetbrains.buildServer.configs.kotlin.v2017_2.triggers.finishBuildTrigger
 
 object Quinoa_2_Docker_Debian : BuildType({
     template(Quinoa_2_Docker.buildTypes.Quinoa_2_Docker_Image)
@@ -15,5 +16,25 @@ object Quinoa_2_Docker_Debian : BuildType({
         param("repository", "quinoa")
         param("tag", "debian")
         param("workdir", "docker")
+    }
+
+    triggers {
+        finishBuildTrigger {
+            id = "TRIGGER_3"
+            buildTypeExtId = "Quinoa_2_Docker_Alpine"
+            branchFilter = """
+                +:<default>
+                +:develop
+            """.trimIndent()
+        }
+    }
+
+    dependencies {
+        dependency(Quinoa_2_Docker.buildTypes.Quinoa_2_Docker_Alpine) {
+                snapshot {
+                        onDependencyFailure = FailureAction.IGNORE
+                        onDependencyCancel = FailureAction.IGNORE
+                }
+        }
     }
 })
