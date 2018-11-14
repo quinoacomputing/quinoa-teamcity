@@ -44,16 +44,6 @@ object Quinoa_2_Docker_Image : Template({
             workingDir = "%workdir%"
             scriptContent = "docker rmi %organization%/%repository%:%tag%"
         }
-        script {
-            name = "Clean docker"
-            id = "RUNNER_34"
-            workingDir = "%workdir%"
-            scriptContent = """
-                docker rmi -f ${'$'}(docker images -q --filter "dangling=true") || true
-                docker rmi -f ${'$'}(docker images | grep "<none>" | awk "{print \${'$'}3}") || true
-                docker rm `docker ps -a | grep Exited | awk '{print ${'$'}1 }'` || true
-            """
-        }
     }
 
     requirements {
