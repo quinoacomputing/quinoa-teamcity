@@ -7,14 +7,16 @@ class Quinoa_2_Linux_Build( bp: BuildParams ) : BuildType({
 
     template(Quinoa_2_Linux.buildTypes.Quinoa_2_Linux_Matrix)
 
+    fun Boolean.toInt() = if (this) 1 else 0
+
     val paramToId = bp.buildtype.toString().toExtId() +
                     bp.compiler.toString().toExtId() +
                     bp.mathlib.toString().toExtId() +
                     bp.stdlibc.toString().toExtId() +
-                    bp.rngsse2.toString().toExtId() +
-                    bp.testu01.toString().toExtId() +
-                    bp.smp.toString().toExtId() +
-                    bp.rndq.toString().toExtId()
+                    bp.rngsse2.toInt().toString().toExtId() +
+                    bp.testu01.toInt().toString().toExtId() +
+                    bp.smp.toInt().toString().toExtId() +
+                    bp.rndq.toInt().toString().toExtId()
 
     uuid = "1308360c-2059-48e8-8188-c06d1f15ecfb_$paramToId"
     extId = "Quinoa_2_Linux_Build_$paramToId"
