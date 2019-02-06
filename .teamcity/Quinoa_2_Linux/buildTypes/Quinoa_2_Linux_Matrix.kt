@@ -52,7 +52,7 @@ object Quinoa_2_Linux_Matrix : Template({
             workingDir = "build"
             scriptContent = """
                 ${stepPrefix}
-                ../script/run_tests.sh 8
+                [ %smp% == true ] && ../script/run_tests.sh 6 ./charmrun +p "--bind-to none -oversubscribe" "+ppn 3" || ../script/run_tests.sh 8
             """.trimIndent()
         }
     }
