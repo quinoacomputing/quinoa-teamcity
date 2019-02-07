@@ -52,12 +52,7 @@ object Quinoa_2_Linux_Matrix : Template({
             workingDir = "build"
             scriptContent = """
                 ${stepPrefix}
-                if [ "%smp% ]; then
-                  ./charmrun +p 6 "--bind-to none -oversubscribe" Main/unittest -v -q +ppn 3;
-                else
-                  mpirun -n 2 "--bind-to none -oversubscribe" Main/unittest -v -q
-                fi; &&
-                ctest -j8 --output-on-failure -LE extreme
+                [ "%smp% ] && ./charmrun +p 6 "--bind-to none -oversubscribe" Main/unittest -v -q +ppn 3 || mpirun -n 2 "--bind-to none -oversubscribe" Main/unittest -v -q && ctest -j8 --output-on-failure -LE extreme
             """.trimIndent()
         }
     }
