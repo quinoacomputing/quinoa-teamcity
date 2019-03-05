@@ -58,7 +58,7 @@ object Quinoa_2_Doc_Matrix : Template({
             name = "Generate cppcheck static analysis report"
             id = "RUNNER_21"
             scriptContent = """
-                ${stepPrefix} && ${cmakeCmd} && ${makeCmd} cppcheck && rm -rf ../%buildtype%/cppcheck && mv doc/cppcheck ../%buildtype%
+                ${stepPrefix} && ${cmakeCmd} && ${makeCmd} cppcheck-xml && rm -rf ../%buildtype%/cppcheck && mv doc/cppcheck ../%buildtype%
             """.trimIndent()
         }
         script {
