@@ -28,7 +28,7 @@ object Quinoa_2_Linux_Matrix : Template({
       [[ %rndq% == false && %smp% == true ]] && module load charm-smp/%compiler%-%stdlibcpp%
       [[ %rndq% == false && %smp% == false ]] && module load charm/%compiler%-%stdlibcpp%
       module load h5part/%compiler% trilinos/%compiler%-%stdlibcpp%/%mathlib% omega_h/%compiler%-%stdlibcpp%
-      module load pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-3.0.6-gcc-4.8.5-n34xdqr ninja-1.8.2-gcc-4.8.5-srfy2lo random123 tut numdiff libc++ backward-cpp highwayhash brigand ccache-3.3.4-gcc-4.8.5-3rwbf2t
+      module load pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-4.0.0-gcc-8.2.0-qcgnz7f ninja-1.8.2-gcc-4.8.5-srfy2lo random123 tut numdiff libc++ backward-cpp highwayhash brigand ccache-3.3.4-gcc-4.8.5-3rwbf2t
       module list""".trimIndent()
 
     steps {
