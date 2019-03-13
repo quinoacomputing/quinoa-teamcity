@@ -14,6 +14,7 @@ object Quinoa_2_Doc_Deploy : BuildType({
 
     vcs {
         root(Quinoa_2.vcsRoots.Quinoa_2_GitGithubComQuinoacomputingQuinoacomputingGithubIoGitRefsHeadsMaster)
+        cleanCheckout = true
     }
 
     steps {
