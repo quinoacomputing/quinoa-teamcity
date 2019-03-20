@@ -15,7 +15,7 @@ object Quinoa_2_Docker_Debian : BuildType({
         param("organization", "quinoacomputing")
         param("repository", "quinoa")
         param("tag", "debian")
-        param("workdir", "docker")
+        param("workdir", "tools/docker")
     }
 
     triggers {

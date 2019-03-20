@@ -14,6 +14,6 @@ object Quinoa_2_Docker_Alpine : BuildType({
         param("organization", "quinoacomputing")
         param("repository", "quinoa")
         param("tag", "alpine")
-        param("workdir", "docker")
+        param("workdir", "tools/docker")
     }
 })
