@@ -18,23 +18,23 @@ object Quinoa_2_Docker_Debian : BuildType({
         param("workdir", "tools/docker")
     }
 
-    triggers {
-        finishBuildTrigger {
-            id = "TRIGGER_3"
-            buildTypeExtId = "Quinoa_2_Docker_Alpine"
-            branchFilter = """
-                +:<default>
-                +:develop
-            """.trimIndent()
-        }
-    }
+    // triggers {
+    //     finishBuildTrigger {
+    //         id = "TRIGGER_3"
+    //         buildTypeExtId = "Quinoa_2_Docker_Alpine"
+    //         branchFilter = """
+    //             +:<default>
+    //             +:develop
+    //         """.trimIndent()
+    //     }
+    // }
 
-    dependencies {
-        dependency(Quinoa_2_Docker.buildTypes.Quinoa_2_Docker_Alpine) {
-                snapshot {
-                        onDependencyFailure = FailureAction.IGNORE
-                        onDependencyCancel = FailureAction.IGNORE
-                }
-        }
-    }
+    // dependencies {
+    //     dependency(Quinoa_2_Docker.buildTypes.Quinoa_2_Docker_Alpine) {
+    //             snapshot {
+    //                     onDependencyFailure = FailureAction.IGNORE
+    //                     onDependencyCancel = FailureAction.IGNORE
+    //             }
+    //     }
+    // }
 })
