@@ -11,7 +11,7 @@ object Quinoa_2_Docker_DebianUnittest : BuildType({
 
     params {
         param("dockerfile", "Dockerfile.quinoa-build-debian-executable-only")
-        param("executable", "UNITTEST")
+        param("executable", "unittest")
         param("organization", "quinoacomputing")
         param("repository", "quinoa")
         param("tag", "debian-unittest")
