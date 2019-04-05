@@ -13,6 +13,7 @@ object Project : Project({
 
     buildType(Quinoa_2_Docker_Debian)
     buildType(Quinoa_2_Docker_DebianUnittest)
+    buildType(Quinoa_2_Docker_DebianWalker)
     buildType(Quinoa_2_Docker_Alpine)
 
     template(Quinoa_2_Docker_ImageForSingleExecutable)
