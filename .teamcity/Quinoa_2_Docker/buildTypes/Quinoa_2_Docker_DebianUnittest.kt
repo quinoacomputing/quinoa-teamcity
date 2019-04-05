@@ -7,7 +7,7 @@ object Quinoa_2_Docker_DebianUnittest : BuildType({
     uuid = "a4c193fd-6e45-44a5-b8a1-3e70c8811d5f"
     id = "Quinoa_2_Docker_DebianUnittest"
     name = "Debian-unittest"
-    description = "Build unittest only"
+    description = "Build unittest only on Debian"
 
     params {
         param("dockerfile", "Dockerfile.quinoa-build-debian-executable-only")
