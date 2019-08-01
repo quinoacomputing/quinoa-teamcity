@@ -23,11 +23,7 @@ object Project : Project({
       StdLibC.values().forEach{ l ->
         MathLib.values().forEach{ m ->
           CmakeBuildType.values().forEach{ b ->
-            for( r in listOf( true, false ) ) {
-              for( t in listOf( true, false ) ) {
-                allBuilds.add( BuildParams(b,c,m,l,r,t,false,false) )
-              }
-            }
+            allBuilds.add( BuildParams(b,c,m,l,false,false) )
           }
         }
       }
@@ -37,8 +33,8 @@ object Project : Project({
     Compiler.values().forEach{ c ->
       StdLibC.values().forEach{ l ->
         CmakeBuildType.values().forEach{ b ->
-          allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
-          allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
+          allBuilds.add( BuildParams(b,c,MathLib.mkl,l,false,true) )  // non-SMP, rndq
+          allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,false) )  // SMP, non-rndq
         }
       }
     }
