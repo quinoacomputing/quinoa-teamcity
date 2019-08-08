@@ -16,19 +16,19 @@ object Quinoa_2_Linux_Matrix : Template({
 
     val stepPrefix = """
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
-      [ %compiler% == clang ] && module load clang/latest openmpi/3.0.0/clang/latest hdf5/clang netcdf/clang hypre/clang
-      [ %compiler% == gnu ] && module load openmpi-3.0.0-gcc-4.8.5-fcuaicj hdf5-1.10.1-gcc-4.8.5-rosmsxt netcdf-4.4.1.1-gcc-4.8.5-4rodz7d hypre-2.12.1-gcc-4.8.5-f34qmcg root/gnu
-      [ %compiler% == intel ] && module load intel/2018 openmpi/3.0.0/intel/2018 hdf5/intel netcdf/intel hypre/intel root/intel
-      [ %mathlib% == mkl ] && module load mkl/2018
+      [ %compiler% == clang ] && module load clang/9 openmpi/3.1.3/clang/9
+      [ %compiler% == gnu ] && module load gcc-9.1.0-gcc-8.2.0-757ly4p openmpi-3.1.3-gcc-9.1-3h7qsmb root/gnu-9
+      [ %compiler% == intel ] && module load intel/2019 mpi
+      [ %mathlib% == mkl ] && module load mkl/2019
       [[ %mathlib% == lapack && %compiler% == intel ]] && module load lapack/intel
       [[ %mathlib% == lapack && %compiler% != intel ]] && module load netlib-lapack-3.6.1-gcc-4.8.5-ln5clys
       [ %rngsse2% == true ] && module load rngsse2
       [ %testu01% == true ] && module load testu01
-      [ %rndq% == true ] && module load charm-rndq/%compiler%-%stdlibcpp%
-      [[ %rndq% == false && %smp% == true ]] && module load charm-smp/%compiler%-%stdlibcpp%
-      [[ %rndq% == false && %smp% == false ]] && module load charm/%compiler%-%stdlibcpp%
-      module load h5part/%compiler% trilinos/%compiler%-%stdlibcpp%/%mathlib% omega_h/%compiler%-%stdlibcpp%
-      module load pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-4.0.0-gcc-8.2.0-qcgnz7f ninja-1.8.2-gcc-4.8.5-srfy2lo random123 tut numdiff libc++ backward-cpp highwayhash brigand ccache-3.3.4-gcc-4.8.5-3rwbf2t
+      [ %rndq% == true ] && module load charm-rndq/%compiler%-9-%stdlibcpp%
+      [[ %rndq% == false && %smp% == true ]] && module load charm-smp/%compiler%-9-%stdlibcpp%
+      [[ %rndq% == false && %smp% == false ]] && module load charm/%compiler%-9-%stdlibcpp%
+      module load hdf5/%compiler%-9 netcdf/%compiler%-9 h5part/%compiler%-9 trilinos/%compiler%-9-%stdlibcpp%/%mathlib% omega_h/%compiler%-9-%stdlibcpp%
+      module load pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-4.0.0-gcc-8.2.0-qcgnz7f ninja-1.8.2-gcc-4.8.5-srfy2lo random123 tut numdiff libc++-clang-9 backward-cpp highwayhash brigand ccache-3.3.4-gcc-4.8.5-3rwbf2t
       module list""".trimIndent()
 
     steps {
