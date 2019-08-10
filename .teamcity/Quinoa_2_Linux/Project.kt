@@ -46,9 +46,9 @@ object Project : Project({
 
     val builds = mutableListOf< BuildParams >()
 
-    // Exclude [gnu,intel]/libc++ builds
+    // Exclude gnu/libc++ builds
     allBuilds.forEach{ b ->
-      if ( !((b.compiler == Compiler.gnu || b.compiler == Compiler.intel) && b.stdlibc == StdLibC.libc)) {
+      if ( !(b.compiler == Compiler.gnu && b.stdlibc == StdLibC.libc)) {
         builds.add( b );
       }
     }

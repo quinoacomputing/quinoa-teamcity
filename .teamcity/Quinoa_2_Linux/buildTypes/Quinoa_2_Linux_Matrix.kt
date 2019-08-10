@@ -18,11 +18,8 @@ object Quinoa_2_Linux_Matrix : Template({
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
       [ %compiler% == clang ] && module load clang/9 openmpi/3.1.3/clang/9
       [ %compiler% == gnu ] && module load gcc-9.1.0-gcc-8.2.0-757ly4p openmpi-3.1.3-gcc-9.1-3h7qsmb root/gnu-9
-      [ %compiler% == intel ] && module load gcc-8.2.0-gcc-4.8.5-53nwzse intel/2019 mpi
       [ %stdlibcpp% == libc++ ] && module load libc++-clang-9 
-      [ %mathlib% == mkl ] && module load mkl/2019
-      [[ %mathlib% == lapack && %compiler% == intel ]] && module load lapack/intel
-      [[ %mathlib% == lapack && %compiler% != intel ]] && module load netlib-lapack-3.6.1-gcc-4.8.5-ln5clys
+      [ %mathlib% == mkl ] && module load mkl/2019 || module load netlib-lapack-3.6.1-gcc-4.8.5-ln5clys
       [ %rngsse2% == true ] && module load rngsse2
       [ %testu01% == true ] && module load testu01
       [ %rndq% == true ] && module load charm-rndq/%compiler%-9-%stdlibcpp%
