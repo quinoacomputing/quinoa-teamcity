@@ -97,7 +97,7 @@ create("19ac1646-b1ed-4d1f-bed9-a16af31a8062", Template({
 
     requirements {
         equals("teamcity.agent.jvm.os.name", "Linux", "RQ_19")
-        contains("teamcity.agent.name", "ccscs", "RQ_20")
+        contains("teamcity.agent.name", "lagrange", "RQ_20")
     }
 }))
 
