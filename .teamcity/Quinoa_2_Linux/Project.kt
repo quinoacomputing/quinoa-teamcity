@@ -12,13 +12,15 @@ object Project : Project({
     name = "Linux"
     description = "Linux builds"
 
+    // Non-Intel builds
+
     template(Quinoa_2_Linux_Matrix)
 
     val allBuilds = mutableListOf< BuildParams >()
 
     // Generate matrix with all possible combinations of build parameters,
-    // defined in package buildParams, not using Charm++'s randomized message
-    // queues, in Charm++'s non-SMP mode.
+    // excluding the Intel compiler, defined in package buildParams, not using
+    // Charm++'s randomized message queues, in Charm++'s non-SMP mode.
     Compiler.values().forEach{ c ->
       StdLibC.values().forEach{ l ->
         MathLib.values().forEach{ m ->
@@ -48,24 +50,26 @@ object Project : Project({
       }
     }
 
+    // Generate non-Intel TeamCity builds
     val builds = mutableListOf< BuildParams >()
-
     // Exclude gnu/libc++ builds
     allBuilds.forEach{ b ->
       if ( !(b.compiler == Compiler.gnu && b.stdlibc == StdLibC.libc)) {
         builds.add( b );
       }
     }
-
-    // Generate TeamCity builds
     builds.forEach{ buildType( Quinoa_2_Linux_Build(it) ) }
 
+
+    // Intel builds
 
     template(Quinoa_2_Linux_MatrixIntel)
 
     val allIntelBuilds = mutableListOf< BuildParams >()
 
-    // Generate intel builds
+    // Generate matrix with all possible combinations of build parameters,
+    // defined in package buildParams, not using Charm++'s randomized message
+    // queues, in Charm++'s non-SMP mode.
     StdLibC.values().forEach{ l ->
       MathLib.values().forEach{ m ->
         CmakeBuildType.values().forEach{ b ->
@@ -74,7 +78,15 @@ object Project : Project({
       }
     }
 
-    // Generate TeamCity intel builds
+    // Add some builds using Charm++'s randomized message queues and non-SMP mode
+    StdLibC.values().forEach{ l ->
+      CmakeBuildType.values().forEach{ b ->
+        allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
+        allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
+      }
+    }
+
+    // Generate TeamCity Intel builds
     allIntelBuilds.forEach{ buildType( Quinoa_2_Linux_BuildIntel(it) ) }
 
 })
