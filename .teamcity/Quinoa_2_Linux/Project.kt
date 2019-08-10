@@ -23,7 +23,9 @@ object Project : Project({
       StdLibC.values().forEach{ l ->
         MathLib.values().forEach{ m ->
           CmakeBuildType.values().forEach{ b ->
-            allBuilds.add( BuildParams(b,c,m,l,true,true,false,false) )
+            if (c != Compiler.intel) {
+              allBuilds.add( BuildParams(b,c,m,l,true,true,false,false) )
+            }
           }
         }
       }
@@ -38,8 +40,10 @@ object Project : Project({
     Compiler.values().forEach{ c ->
       StdLibC.values().forEach{ l ->
         CmakeBuildType.values().forEach{ b ->
-          allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
-          allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
+          if (c != Compiler.intel) {
+            allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
+            allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
+          }
         }
       }
     }
@@ -55,4 +59,22 @@ object Project : Project({
 
     // Generate TeamCity builds
     builds.forEach{ buildType( Quinoa_2_Linux_Build(it) ) }
+
+
+    template(Quinoa_2_Linux_MatrixIntel)
+
+    val allIntelBuilds = mutableListOf< BuildParams >()
+
+    // Generate intel builds
+    StdLibC.values().forEach{ l ->
+      MathLib.values().forEach{ m ->
+        CmakeBuildType.values().forEach{ b ->
+          allIntelBuilds.add( BuildParams(b,Compiler.intel,m,l,true,true,false,false) )
+        }
+      }
+    }
+
+    // Generate TeamCity intel builds
+    allIntelBuilds.forEach{ buildType( Quinoa_2_Linux_BuildIntel(it) ) }
+
 })
