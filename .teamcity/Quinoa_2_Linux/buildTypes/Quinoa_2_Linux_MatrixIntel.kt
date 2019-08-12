@@ -14,6 +14,7 @@ object Quinoa_2_Linux_MatrixIntel : Template({
     }
 
     val stepPrefix = """
+      .  /usr/share/modules/init/bash && module use ~/modules && module use /opt/intel/compilers_and_libraries_2019/linux/mpi/intel64/modulefiles
       module load intel/2019 mpi
       [ %stdlibcpp% == libc++ ] && module load libc++-clang-9 
       [ %mathlib% == mkl ] && module load mkl/2019
