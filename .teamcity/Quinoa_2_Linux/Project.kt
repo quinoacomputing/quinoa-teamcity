@@ -73,7 +73,9 @@ object Project : Project({
     StdLibC.values().forEach{ l ->
       MathLib.values().forEach{ m ->
         CmakeBuildType.values().forEach{ b ->
-          allIntelBuilds.add( BuildParams(b,Compiler.intel,m,l,true,true,false,false) )
+          if (l != StdLibC.libc) {
+            allIntelBuilds.add( BuildParams(b,Compiler.intel,m,l,true,true,false,false) )
+          }
         }
       }
     }
@@ -81,8 +83,10 @@ object Project : Project({
     // Add some builds using Charm++'s randomized message queues and non-SMP mode
     StdLibC.values().forEach{ l ->
       CmakeBuildType.values().forEach{ b ->
-        allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
-        allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
+        if (l != StdLibC.libc) {
+          allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
+          // allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
+        }
       }
     }
 
