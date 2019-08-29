@@ -15,13 +15,12 @@ object Project : Project({
     template(Quinoa_2_Mac_Matrix)
     val allBuilds = mutableListOf< BuildParams >()
 
-    // Generate matrix with all possible combinations of build parameters
-    // defined in package buildParams.
+    // Generate matrix
     CmakeBuildType.values().forEach{ b ->
-      Compiler.values().forEach{ c ->
-        allBuilds.add( BuildParams(b,c,false,"") )
-        allBuilds.add( BuildParams(b,c,true,"-rndq") )
-      }
+      //                                        smp,  rndq
+      allBuilds.add( BuildParams(b,Compiler.gnu,false,false,"") )
+      allBuilds.add( BuildParams(b,Compiler.gnu,false,true,"-rndq") )
+      allBuilds.add( BuildParams(b,Compiler.gnu,true,false,"-smp") )
     }
 
     val builds = mutableListOf< BuildParams >()

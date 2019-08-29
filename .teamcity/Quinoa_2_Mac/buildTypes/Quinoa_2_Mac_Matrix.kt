@@ -15,8 +15,9 @@ object Quinoa_2_Mac_Matrix : Template({
     }
 
     val stepPrefix = """
-      [ %compiler% == clang ] && port select clang mp-clang-6.0 && port select mpi openmpi-clang60-fortran
-      [ %compiler% == gnu ] && port select gcc mp-gcc8 && port select mpi openmpi-gcc8-fortran
+      . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
+      [ %compiler% == clang ] && openmpi-3.1.4-clang-10.0.0-apple-gktnzf5 hdf5-1.10.5-clang-10.0.0-apple-ebdcvu2
+      [ %compiler% == gnu ] && module load gcc-9.2.0-clang-10.0.0-apple-vcpkolh openmpi-3.1.4-gcc-9.2.0-my2rkcv hdf5-1.10.5-gcc-9.2.0-prdkirn
     """.trimIndent()
 
     steps {
@@ -31,7 +32,7 @@ object Quinoa_2_Mac_Matrix : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=/Users/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64%tpl% -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -GNinja ../src && ccache -z && ninja -j%teamcity.agent.hardware.cpuCount% && ccache -s
+                cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DTPL_DIR=/Users/jbakosi/code/quinoa-tpl/install/%compiler%-x86_64%tpl% -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -GNinja ../src && ccache -z && ninja && ccache -s
             """.trimIndent()
         }
         script {
@@ -40,7 +41,7 @@ object Quinoa_2_Mac_Matrix : Template({
             workingDir = "build"
             scriptContent = """
                 ${stepPrefix}
-                ./charmrun +p%teamcity.agent.hardware.cpuCount% -oversubscribe Main/unittest -v -q && ctest -j%teamcity.agent.hardware.cpuCount% --output-on-failure -LE extreme
+                if [ %smp% = true ]; then ./charmrun +p 22 --bind-to none Main/unittest -v -q +ppn 11; else ./charmrun +p 24 -oversubscribe Main/unittest -v -q; fi && ctest -j24 --output-on-failure -LE extreme
             """.trimIndent()
         }
     }
