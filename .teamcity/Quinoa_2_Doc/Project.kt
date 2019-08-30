@@ -19,4 +19,8 @@ object Project : Project({
 
     // Generate deploy build
     buildType(Quinoa_2_Doc_Deploy)
+
+    cleanup {
+      artifacts(days = 14)
+    }
 })
