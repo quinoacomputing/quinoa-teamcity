@@ -17,7 +17,7 @@ object Quinoa_2_Linux_Matrix : Template({
     val stepPrefix = """
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
       [ %compiler% == clang ] && module load clang/9 openmpi/3.1.3/clang/9
-      [ %compiler% == gnu ] && module load gcc-9.1.0-gcc-8.2.0-757ly4p openmpi-3.1.3-gcc-9.1-3h7qsmb root/gnu-9
+      [ %compiler% == gnu ] && module load gcc-9.1.0-gcc-8.2.0-757ly4p openmpi-4.0.1-gcc-9.1.0-wiqayvj root/gnu-9
       [ %stdlibcpp% == libc++ ] && module load libc++-clang-9 
       [ %mathlib% == mkl ] && module load mkl/2019 || module load netlib-lapack-3.6.1-gcc-4.8.5-ln5clys
       [ %rngsse2% == true ] && module load rngsse2
