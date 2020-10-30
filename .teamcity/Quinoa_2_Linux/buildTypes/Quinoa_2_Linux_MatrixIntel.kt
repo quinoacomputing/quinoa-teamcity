@@ -25,7 +25,8 @@ object Quinoa_2_Linux_MatrixIntel : Template({
       [[ %rndq% == false && %smp% == false ]] && module load charm/intel-%stdlibcpp%
       module load hdf5/intel netcdf/intel h5part/intel trilinos/intel-%stdlibcpp%/%mathlib% omega_h/intel-%stdlibcpp%
       module load random123 tut numdiff highwayhash brigand sol2
-      module list""".trimIndent()
+      module list
+      export FI_PROVIDER=tcp""".trimIndent()
 
     steps {
         script {
