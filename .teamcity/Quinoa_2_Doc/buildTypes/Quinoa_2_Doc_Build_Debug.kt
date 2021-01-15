@@ -14,6 +14,6 @@ object Quinoa_2_Doc_Build_Debug : BuildType({
     }
 
     requirements {
-        contains("teamcity.agent.name", "ccscs3-14", "RQ_27")
+        contains("teamcity.agent.name", "lagrange", "RQ_27")
    }
 })

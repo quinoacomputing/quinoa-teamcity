@@ -17,13 +17,10 @@ object Quinoa_2_Doc_Matrix : Template({
     }
 
     val stepPrefix = """
-        . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
-        module load gcc-9.1.0-gcc-8.2.0-757ly4p openmpi-3.1.3-gcc-9.1-3h7qsmb hdf5/gnu-9 netcdf/gnu-9 root/gnu-9 mkl/2019 rngsse2 testu01 charm/gnu-9-libstdc++ h5part/gnu-9 trilinos/gnu-9-libstdc++/mkl pugixml pegtl pstreams boost-1.65.1-gcc-4.8.5-s7d4zmv gmsh-4.0.0-gcc-8.2.0-qcgnz7f random123 tut numdiff highwayhash omega_h/gnu-9-libstdc++ backward-cpp brigand sol2 doxygen mcss python-3.6.5-gcc-4.8.5-3gahby7 py-jinja2-2.9.6-gcc-4.8.5-c3xwcj5 py-pygments-2.2.0-gcc-4.8.5-alkmyw7 py-markupsafe-1.0-gcc-4.8.5-5qh4ssa texlive-live-gcc-4.8.5-ojsyovg ccache-3.3.4-gcc-4.8.5-3rwbf2t cppcheck-1.87-gcc-9.1.0-mlpb4h6
-        module list
         rm -rf build && mkdir build && cd build
         """.trimIndent()
 
-    val cmakeCmd = "cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on -DRUNNER_ARGS=\"--bind-to none --map-by node -oversubscribe\" ../src"
+    val cmakeCmd = "cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on -DRUNNER_ARGS=\"--bind-to none --map-by node -oversubscribe\" -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/gnu ../src"
 
     val makeCmd = "make -j40"
 
