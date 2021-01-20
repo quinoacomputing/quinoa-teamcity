@@ -18,6 +18,7 @@ object Quinoa_2_Mac_Matrix : Template({
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
       [ %compiler% == clang ] && openmpi-3.1.4-clang-10.0.0-apple-gktnzf5 hdf5-1.10.5-clang-10.0.0-apple-ebdcvu2
       [ %compiler% == gnu ] && module load gcc-9.2.0-clang-10.0.0-apple-vcpkolh openmpi-3.1.4-gcc-9.2.0-my2rkcv hdf5-1.10.5-gcc-9.2.0-prdkirn
+      module list
     """.trimIndent()
 
     steps {
