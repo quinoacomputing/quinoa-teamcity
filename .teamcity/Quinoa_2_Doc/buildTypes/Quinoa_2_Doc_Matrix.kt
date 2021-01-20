@@ -31,7 +31,7 @@ object Quinoa_2_Doc_Matrix : Template({
         script {
             name = "Verify commit"
             id = "RUNNER_17"
-            scriptContent = """/ccs/opt/git/bin/git verify-commit %build.vcs.number% 2>&1 | grep "Good signature""""
+            scriptContent = """git verify-commit %build.vcs.number% 2>&1 | grep "Good signature""""
         }
         script {
             name = "Generate unit test coverage"
