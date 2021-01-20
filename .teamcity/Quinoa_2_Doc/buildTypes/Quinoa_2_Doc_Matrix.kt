@@ -20,9 +20,9 @@ object Quinoa_2_Doc_Matrix : Template({
         rm -rf build && mkdir build && cd build
         """.trimIndent()
 
-    val cmakeCmd = "cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on -DRUNNER_ARGS=\"--bind-to none -oversubscribe\" -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/gnu ../src"
+    val cmakeCmd = "cmake -DCMAKE_CXX_COMPILER=mpicxx -DCMAKE_C_COMPILER=mpicc -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -DCOVERAGE=on -DRUNNER_ARGS=\"--bind-to none\" -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/gnu ../src"
 
-    val makeCmd = "make -j36"
+    val makeCmd = "make -j30"
 
     steps {
         script {
