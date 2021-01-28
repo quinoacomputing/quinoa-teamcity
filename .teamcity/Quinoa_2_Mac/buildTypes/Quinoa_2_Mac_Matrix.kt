@@ -16,8 +16,9 @@ object Quinoa_2_Mac_Matrix : Template({
 
     val stepPrefix = """
       . ${'$'}SPACK_ROOT/share/spack/setup-env.sh
+      module load gnupg-2.2.25-apple-clang-12.0.0-7qxfsez ninja-1.10.2-apple-clang-12.0.0-cmaq3l3 ccache-3.7.11-apple-clang-12.0.0-gun2fae cmake-3.19.2-apple-clang-12.0.0-fnkxqra libtool-2.4.6-apple-clang-12.0.0-55jkyhe autoconf-2.69-apple-clang-12.0.0-kurpqjy automake-1.16.3-apple-clang-12.0.0-wpk76mp environment-modules-4.6.1-apple-clang-12.0.0-hxinmyj
       [ %compiler% == clang ] && openmpi-3.1.4-clang-10.0.0-apple-gktnzf5 hdf5-1.10.5-clang-10.0.0-apple-ebdcvu2
-      [ %compiler% == gnu ] && module load gcc-9.2.0-clang-10.0.0-apple-vcpkolh openmpi-3.1.4-gcc-9.2.0-my2rkcv hdf5-1.10.5-gcc-9.2.0-prdkirn
+      [ %compiler% == gnu ] && module load gcc-10.2.0-apple-clang-12.0.0-yhi67dp openmpi-4.0.5-gcc-10.2.0-4w7bqvj hdf5-1.10.7-gcc-10.2.0-3ebiti7
       module list
     """.trimIndent()
 
@@ -25,7 +26,10 @@ object Quinoa_2_Mac_Matrix : Template({
         script {
             name = "Verify commit"
             id = "RUNNER_20"
-            scriptContent = """git verify-commit %build.vcs.number% 2>&1 | grep "Good signature""""
+            scriptContent = """
+                ${stepPrefix}
+                git verify-commit %build.vcs.number% 2>&1 | grep "Good signature
+            """"
         }
         script {
             name = "Build code"
