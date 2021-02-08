@@ -18,7 +18,8 @@ object Quinoa_2_Linux_MatrixIntel : Template({
       module load intel/2019 mpi
       [ %mathlib% == mkl ] && module load mkl/2019
       export __INTEL_PRE_CFLAGS="-gxx-name=g++-8 -gcc-name=gcc-8"
-      export FI_PROVIDER=tcp""".trimIndent()
+      export FI_PROVIDER=tcp
+    """.trimIndent()
 
     steps {
         script {
@@ -32,10 +33,10 @@ object Quinoa_2_Linux_MatrixIntel : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                if [[ %rndq% = true && %mathlib% = mkl ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl-rndq -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -GNinja ../src; fi
-                if [[ %rndq% = false && %mathlib% = mkl ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -GNinja ../src; fi
-                if [[ %rndq% = false && %mathlib% = lapack ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-lapack -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -GNinja ../src; fi
-                ccache -z && ninja -j8 && ccache -s
+                if [[ %rndq% = true && %mathlib% = mkl ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl-rndq -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
+                if [[ %rndq% = false && %mathlib% = mkl ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
+                if [[ %rndq% = false && %mathlib% = lapack ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-lapack -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
+                ninja -j8
             """.trimIndent()
         }
         script {
