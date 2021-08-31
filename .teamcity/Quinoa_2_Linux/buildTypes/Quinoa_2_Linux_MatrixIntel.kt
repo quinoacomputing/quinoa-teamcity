@@ -17,7 +17,6 @@ object Quinoa_2_Linux_MatrixIntel : Template({
       . /usr/share/modules/init/bash && module use ~/modules && module use /opt/intel/compilers_and_libraries_2019/linux/mpi/intel64/modulefiles
       module load intel/2019 mpi
       [ %mathlib% == mkl ] && module load mkl/2019
-      export __INTEL_PRE_CFLAGS="-gxx-name=g++-8 -gcc-name=gcc-8"
       export FI_PROVIDER=tcp
     """.trimIndent()
 
