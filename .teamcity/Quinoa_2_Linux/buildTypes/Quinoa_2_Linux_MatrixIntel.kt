@@ -41,7 +41,7 @@ object Quinoa_2_Linux_MatrixIntel : Template({
             workingDir = "build"
             scriptContent = """
                 ${stepPrefix}
-                if [ %smp% = true ]; then ./charmrun +p6 "--bind-to none" Main/unittest -v -q +ppn 3; else ./charmrun +p8 "--bind-to none" Main/unittest -v -q; fi && ctest -j8 --output-on-failure -LE extreme
+                if [ %smp% = true ]; then ./charmrun +p6 "--bind-to none" Main/unittest -v -q +ppn 3; else ./charmrun +p8 Main/unittest -v -q; fi && ctest -j8 --output-on-failure -LE extreme
             """.trimIndent()
         }
         stepsOrder = arrayListOf("RUNNER_17", "RUNNER_18", "RUNNER_19")
