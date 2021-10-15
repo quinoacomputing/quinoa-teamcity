@@ -71,11 +71,9 @@ object Project : Project({
     // defined in package buildParams, not using Charm++'s randomized message
     // queues, in Charm++'s non-SMP mode.
     StdLibC.values().forEach{ l ->
-      MathLib.values().forEach{ m ->
-        CmakeBuildType.values().forEach{ b ->
-          if (l != StdLibC.libc) {
-            allIntelBuilds.add( BuildParams(b,Compiler.intel,m,l,true,true,false,false) )
-          }
+      CmakeBuildType.values().forEach{ b ->
+        if (l != StdLibC.libc) {
+          allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,false,false) )
         }
       }
     }

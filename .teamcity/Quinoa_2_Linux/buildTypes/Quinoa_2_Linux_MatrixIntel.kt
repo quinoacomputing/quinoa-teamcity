@@ -14,9 +14,7 @@ object Quinoa_2_Linux_MatrixIntel : Template({
     }
 
     val stepPrefix = """
-      . /usr/share/modules/init/bash && module use ~/modules && module use /opt/intel/compilers_and_libraries_2019/linux/mpi/intel64/modulefiles
-      module load intel/2019 mpi
-      [ %mathlib% == mkl ] && module load mkl/2019
+      source /opt/intel/oneapi/setvars.sh intel64
       export FI_PROVIDER=tcp
     """.trimIndent()
 
@@ -32,9 +30,8 @@ object Quinoa_2_Linux_MatrixIntel : Template({
             scriptContent = """
                 ${stepPrefix}
                 rm -rf build && mkdir build && cd build
-                if [[ %rndq% = true && %mathlib% = mkl ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl-rndq -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
-                if [[ %rndq% = false && %mathlib% = mkl ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
-                if [[ %rndq% = false && %mathlib% = lapack ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-lapack -DCMAKE_CXX_COMPILER=icpc -DCMAKE_C_COMPILER=icc -DCMAKE_BUILD_TYPE=%buildtype% -DMATHLIB=%mathlib% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
+                if [[ %rndq% = true ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl-rndq -DCMAKE_C_COMPILER=mpiicc -DCMAKE_CXX_COMPILER=mpiicpc -DENABLE_RNGTEST=false -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
+                if [[ %rndq% = false ]]; then cmake -DTPL_DIR=/scratch3/jbakosi/quinoa-tpl/intel-mkl -DCMAKE_C_COMPILER=mpiicc -DCMAKE_CXX_COMPILER=mpiicpc -DENABLE_RNGTEST=false -DCMAKE_BUILD_TYPE=%buildtype% -DCMAKE_CXX_FLAGS=-Werror -GNinja ../src; fi
                 ninja -j8
             """.trimIndent()
         }
