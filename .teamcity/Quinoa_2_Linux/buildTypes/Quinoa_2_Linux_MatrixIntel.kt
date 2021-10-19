@@ -65,6 +65,7 @@ object Quinoa_2_Linux_MatrixIntel : Template({
             branchFilter = """
                 +:<default>
                 +:develop
+                +:*
             """.trimIndent()
         }
     }
