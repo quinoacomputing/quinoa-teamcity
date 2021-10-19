@@ -26,7 +26,7 @@ object Project : Project({
         MathLib.values().forEach{ m ->
           CmakeBuildType.values().forEach{ b ->
             if (c != Compiler.intel) {
-              allBuilds.add( BuildParams(b,c,m,l,true,true,false,false) )
+              allBuilds.add( BuildParams(b,c,m,l,false,false) )
             }
           }
         }
@@ -34,17 +34,17 @@ object Project : Project({
     }
 
     // Add builds with some optional libraries unavailable
-    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,false,false,false) )
-    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,true,false,false) )
-    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,true,false,false,false) )
+    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,false) )
+    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,false) )
+    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,false) )
 
     // Add some builds using Charm++'s randomized message queues and non-SMP mode
     Compiler.values().forEach{ c ->
       StdLibC.values().forEach{ l ->
         CmakeBuildType.values().forEach{ b ->
           if (c != Compiler.intel) {
-            allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
-            allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
+            allBuilds.add( BuildParams(b,c,MathLib.mkl,l,false,true) )  // non-SMP, rndq
+            allBuilds.add( BuildParams(b,c,MathLib.mkl,l,true,false) )  // SMP, non-rndq
           }
         }
       }
@@ -73,7 +73,7 @@ object Project : Project({
     StdLibC.values().forEach{ l ->
       CmakeBuildType.values().forEach{ b ->
         if (l != StdLibC.libc) {
-          allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,false,false) )
+          allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,false,false) )
         }
       }
     }
@@ -82,7 +82,7 @@ object Project : Project({
     StdLibC.values().forEach{ l ->
       CmakeBuildType.values().forEach{ b ->
         if (l != StdLibC.libc) {
-          allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,false,true) )  // non-SMP, rndq
+          allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,false,true) )  // non-SMP, rndq
           // allIntelBuilds.add( BuildParams(b,Compiler.intel,MathLib.mkl,l,true,true,true,false) )  // SMP, non-rndq
         }
       }
