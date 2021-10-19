@@ -33,11 +33,6 @@ object Project : Project({
       }
     }
 
-    // Add builds with some optional libraries unavailable
-    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,false) )
-    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,false) )
-    allBuilds.add( BuildParams(CmakeBuildType.Release,Compiler.gnu,MathLib.mkl,StdLibC.libstdc,false,false) )
-
     // Add some builds using Charm++'s randomized message queues and non-SMP mode
     Compiler.values().forEach{ c ->
       StdLibC.values().forEach{ l ->
